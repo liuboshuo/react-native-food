@@ -1,22 +1,53 @@
-# Compiled class file
-*.class
+# OSX
+#
+.DS_Store
 
-# Log file
-*.log
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
 
-# BlueJ files
-*.ctxt
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
 
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
+
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
