@@ -34,8 +34,16 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* rn_foodsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* rn_foodsTests.m */; };
+		3709E4271F31FCC7004EE93D /* NativeAppModules.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709E41E1F31FCC7004EE93D /* NativeAppModules.m */; };
+		3709E4281F31FCC7004EE93D /* LSProjectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709E4211F31FCC7004EE93D /* LSProjectUtils.m */; };
+		3709E4291F31FCC7004EE93D /* LSViewControllerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709E4231F31FCC7004EE93D /* LSViewControllerUtils.m */; };
+		3709E42A1F31FCC7004EE93D /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709E4251F31FCC7004EE93D /* NavigationController.m */; };
+		3709E4331F31FD12004EE93D /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709E4311F31FD12004EE93D /* NSString+Category.m */; };
+		3709E4361F31FD2C004EE93D /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709E4351F31FD2C004EE93D /* UIImage+Category.m */; };
+		3709E4391F31FD73004EE93D /* NSData+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 3709E4381F31FD73004EE93D /* NSData+Category.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		D0700D984D7F086BDED4796F /* Pods_rn_foods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA589505455E751D2D29D923 /* Pods_rn_foods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -252,9 +260,28 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* rn_foods-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rn_foods-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* rn_foods-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "rn_foods-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3709E41D1F31FCC7004EE93D /* NativeAppModules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeAppModules.h; sourceTree = "<group>"; };
+		3709E41E1F31FCC7004EE93D /* NativeAppModules.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeAppModules.m; sourceTree = "<group>"; };
+		3709E4201F31FCC7004EE93D /* LSProjectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSProjectUtils.h; sourceTree = "<group>"; };
+		3709E4211F31FCC7004EE93D /* LSProjectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSProjectUtils.m; sourceTree = "<group>"; };
+		3709E4221F31FCC7004EE93D /* LSViewControllerUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSViewControllerUtils.h; sourceTree = "<group>"; };
+		3709E4231F31FCC7004EE93D /* LSViewControllerUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSViewControllerUtils.m; sourceTree = "<group>"; };
+		3709E4241F31FCC7004EE93D /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		3709E4251F31FCC7004EE93D /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		3709E4261F31FCC7004EE93D /* SingletonTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingletonTemplate.h; sourceTree = "<group>"; };
+		3709E4301F31FD12004EE93D /* NSString+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Category.h"; sourceTree = "<group>"; };
+		3709E4311F31FD12004EE93D /* NSString+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Category.m"; sourceTree = "<group>"; };
+		3709E4341F31FD2C004EE93D /* UIImage+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Category.h"; sourceTree = "<group>"; };
+		3709E4351F31FD2C004EE93D /* UIImage+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Category.m"; sourceTree = "<group>"; };
+		3709E4371F31FD73004EE93D /* NSData+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Category.h"; sourceTree = "<group>"; };
+		3709E4381F31FD73004EE93D /* NSData+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Category.m"; sourceTree = "<group>"; };
+		3709E43B1F31FDC7004EE93D /* prefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = prefixHeader.pch; path = rn_foods/prefixHeader.pch; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		85E2779C7C88BC7F7C529560 /* Pods-rn_foods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_foods.debug.xcconfig"; path = "Pods/Target Support Files/Pods-rn_foods/Pods-rn_foods.debug.xcconfig"; sourceTree = "<group>"; };
+		A12914764D99E7E8130D7A97 /* Pods-rn_foods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rn_foods.release.xcconfig"; path = "Pods/Target Support Files/Pods-rn_foods/Pods-rn_foods.release.xcconfig"; sourceTree = "<group>"; };
+		FA589505455E751D2D29D923 /* Pods_rn_foods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rn_foods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +308,7 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				D0700D984D7F086BDED4796F /* Pods_rn_foods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,12 +417,14 @@
 		13B07FAE1A68108700A75B9A /* rn_foods */ = {
 			isa = PBXGroup;
 			children = (
+				3709E3CE1F31FB2A004EE93D /* classess */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				3709E43B1F31FDC7004EE93D /* prefixHeader.pch */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = rn_foods;
@@ -415,6 +445,53 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3709E3CE1F31FB2A004EE93D /* classess */ = {
+			isa = PBXGroup;
+			children = (
+				3709E41B1F31FCC7004EE93D /* Category */,
+				3709E41C1F31FCC7004EE93D /* Module */,
+				3709E41F1F31FCC7004EE93D /* Tools */,
+			);
+			name = classess;
+			path = rn_foods/classess;
+			sourceTree = "<group>";
+		};
+		3709E41B1F31FCC7004EE93D /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				3709E4371F31FD73004EE93D /* NSData+Category.h */,
+				3709E4381F31FD73004EE93D /* NSData+Category.m */,
+				3709E4301F31FD12004EE93D /* NSString+Category.h */,
+				3709E4311F31FD12004EE93D /* NSString+Category.m */,
+				3709E4341F31FD2C004EE93D /* UIImage+Category.h */,
+				3709E4351F31FD2C004EE93D /* UIImage+Category.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		3709E41C1F31FCC7004EE93D /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				3709E41D1F31FCC7004EE93D /* NativeAppModules.h */,
+				3709E41E1F31FCC7004EE93D /* NativeAppModules.m */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		3709E41F1F31FCC7004EE93D /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				3709E4201F31FCC7004EE93D /* LSProjectUtils.h */,
+				3709E4211F31FCC7004EE93D /* LSProjectUtils.m */,
+				3709E4221F31FCC7004EE93D /* LSViewControllerUtils.h */,
+				3709E4231F31FCC7004EE93D /* LSViewControllerUtils.m */,
+				3709E4241F31FCC7004EE93D /* NavigationController.h */,
+				3709E4251F31FCC7004EE93D /* NavigationController.m */,
+				3709E4261F31FCC7004EE93D /* SingletonTemplate.h */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,6 +501,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		72D8CE65AC52ED74916F5D10 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				85E2779C7C88BC7F7C529560 /* Pods-rn_foods.debug.xcconfig */,
+				A12914764D99E7E8130D7A97 /* Pods-rn_foods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +517,14 @@
 				3DAD3E881DF850E9000B6D8A /* libRCTLinking-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		7D6DFC41FC0531FF803D0407 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA589505455E751D2D29D923 /* Pods_rn_foods.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -467,6 +561,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* rn_foodsTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				72D8CE65AC52ED74916F5D10 /* Pods */,
+				7D6DFC41FC0531FF803D0407 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -508,10 +604,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "rn_foods" */;
 			buildPhases = (
+				2A1F6BA5FC28BEC0C20160FD /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				345A0CDECCFB66ABF15354FA /* [CP] Embed Pods Frameworks */,
+				CDEC1A9A30507BA54B9B4323 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -879,6 +978,21 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
+		2A1F6BA5FC28BEC0C20160FD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -892,6 +1006,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		345A0CDECCFB66ABF15354FA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rn_foods/Pods-rn_foods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDEC1A9A30507BA54B9B4323 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-rn_foods/Pods-rn_foods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -908,8 +1052,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3709E4391F31FD73004EE93D /* NSData+Category.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				3709E4281F31FCC7004EE93D /* LSProjectUtils.m in Sources */,
+				3709E42A1F31FCC7004EE93D /* NavigationController.m in Sources */,
+				3709E4361F31FD2C004EE93D /* UIImage+Category.m in Sources */,
+				3709E4291F31FCC7004EE93D /* LSViewControllerUtils.m in Sources */,
+				3709E4271F31FCC7004EE93D /* NativeAppModules.m in Sources */,
+				3709E4331F31FD12004EE93D /* NSString+Category.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -997,11 +1148,13 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85E2779C7C88BC7F7C529560 /* Pods-rn_foods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = WD5EQTR7NX;
+				GCC_PREFIX_HEADER = rn_foods/prefixHeader.pch;
 				INFOPLIST_FILE = rn_foods/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1016,10 +1169,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A12914764D99E7E8130D7A97 /* Pods-rn_foods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WD5EQTR7NX;
+				GCC_PREFIX_HEADER = rn_foods/prefixHeader.pch;
 				INFOPLIST_FILE = rn_foods/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (

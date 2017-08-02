@@ -36,27 +36,23 @@ export class HttpError {
 
 //服务出错
 export function defaultOnServerError(error_code,message) {
-
     const msg = message || server_error_message(error_code) || "服务器异常！！"
-
     appLog(message)
-    // hideHud()
+    hideHud()
     Alert.alert("错误",msg)
 }
 //网络连接出错
 export function defaultOnNetWorkError(error) {
     appLog(error)
-    // hideHud()
+    hideHud()
     Alert.alert("错误","网络连接出错，请稍后在尝试");
 }
-
 
 function server_error_message(code) {
     return SERVER_ERROR_MESSAGE[code];
 }
 
 function checkStatus(response) {
-    // hideHud();
     appLog(`request status ${response.status}`);
     if (response.status >= 200 && response.status< 300){
         return response;
@@ -86,7 +82,6 @@ export function request(method,url,params,onSuccess,onServerError=defaultOnServe
     .then((response)=>{
         return response.json();
     }).then(response=>{
-
         if (response.error_code == 0){
             //判断服务器的逻辑
             onSuccess(response);
@@ -95,7 +90,6 @@ export function request(method,url,params,onSuccess,onServerError=defaultOnServe
         }else {
             onServerError(response.error_code,response.reason)
         }
-
     }).catch(error=>{
         onNetWorkError(error);
     })

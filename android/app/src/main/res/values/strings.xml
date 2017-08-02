@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">rn_foods</string>
+    <string name="server_host">http://apis.juhe.cn</string>
 </resources>
