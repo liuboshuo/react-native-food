@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import {common_theme} from "./../common/commonStyle";
 import Swiper from 'react-native-swiper'
+import NetWorkImage from "../common/component/netWorkImage";
 
 class Home_Top_Banner extends Component{
 
@@ -42,15 +43,14 @@ class Home_Top_Banner extends Component{
         const banners = top_banners.map((item,index)=>{
             return <TouchableOpacity key={index}
                                activeOpacity={1}>
-                <Image style={styles.imageStyle}
-                       source={{uri:item.albums[0]}}/>
+                <NetWorkImage   style={styles.imageStyle}
+                                uri={item.albums[0]}/>
 
             </TouchableOpacity>
         });
         return (
             <Swiper
                 height={height}
-                autoplay
                 loop={true}
                 renderPagination={
                     this.renderPagination.bind(this)
@@ -63,7 +63,7 @@ class Home_Top_Banner extends Component{
     }
 }
 
-const height = 150
+const height = 190
 const styles = StyleSheet.create({
     imageStyle:{
         width:common_theme.screenWidth,

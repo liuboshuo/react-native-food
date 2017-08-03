@@ -9,11 +9,12 @@ import {
     Animated
 } from 'react-native'
 import {connect} from 'react-redux'
-import {getBannerDatas,getTagDatas} from "./../actions/home_action";
+import {getBannerDatas,getTagDatas,getMainDatas} from "./../actions/home_action";
 import Home_Top_Banner from "./../component/home_top_banner";
 import {common_theme} from "./../common/commonStyle";
 import Button from "./../common/component/button";
 import Home_Top_Tag from './../component/home_top_tag'
+import Home_Com from "../component/home_com";
 const scrollEventThrottle = 1;
 class Home_Page extends React.Component {
 
@@ -34,7 +35,7 @@ class Home_Page extends React.Component {
     }
     onScroll(event){
         const y = event.nativeEvent.contentOffset.y;
-        const maxY = 200;
+        const maxY = 150;
         if (y <= maxY){
             Animated.timing(this.state.topViewOpacity,{
                 toValue:y/maxY,
@@ -46,10 +47,11 @@ class Home_Page extends React.Component {
         const {dispatch} = this.props;
         dispatch(getBannerDatas())
         dispatch(getTagDatas())
+        dispatch(getMainDatas())
     }
 
     render (){
-        const {top_banners,top_tags} = this.props;
+        const {top_banners,top_tags,main_data} = this.props;
         const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
@@ -73,6 +75,9 @@ class Home_Page extends React.Component {
                     {/**/}
                     <Home_Top_Banner top_banners={top_banners}/>
                     <Home_Top_Tag top_tags={top_tags}/>
+
+                    <Home_Com main_data={main_data}/>
+
                 </ScrollView>
             </View>
         )

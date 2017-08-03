@@ -10,7 +10,7 @@ import {
     ActivityIndicator,
 } from 'react-native';
 
-export default class NeWorkImage extends Component {
+export default class NetWorkImage extends Component {
 
     constructor (props) {
         super(props)
@@ -43,19 +43,22 @@ export default class NeWorkImage extends Component {
                 <Image onLoad={this.loadHandle.bind(this)}
                              source={{uri:this.props.uri}}
                              style={this.props.style? this.props.style:{}}>
-                    {this.state.loading && <View style={[styles.loadingView,{backgroundColor:loadViewBg}]}>
-                        {
-                            this.props.placeholder == null ?
-                                <ActivityIndicator animating={this.state.loading} size={"small"} />
-                                :
+
+
+                    {this.props.children}
+                </Image>
+                {this.state.loading && <View style={[styles.loadingView,{backgroundColor:loadViewBg}]}>
+                    {
+                        this.props.placeholder == null ?
+                            <ActivityIndicator animating={this.state.loading} size={"small"} />
+                            :
                             this.props.placeholder.uri != null ?
-                            <Image style={[styles.loadingImage,{width:this.props.width,height:this.props.height,resizeMode:resizeMode}]} source={{uri:this.props.placeholder.uri}}/>
+                                <Image style={[styles.loadingImage,{width:this.props.width,height:this.props.height,resizeMode:resizeMode}]} source={{uri:this.props.placeholder.uri}}/>
 
                                 :<ActivityIndicator animating={this.state.loading} size={"small"} />
-                        }
-                    </View>
                     }
-                </Image>
+                </View>
+                }
             </View>
         );
     }

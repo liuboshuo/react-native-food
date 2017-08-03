@@ -13,6 +13,16 @@ import {StyleSheet,Image} from 'react-native';
 import {common_theme} from "./common/commonStyle";
 
 
+const styles = StyleSheet.create({
+    iconBigStyle:{
+        width:28,
+        height:28,
+    },
+    iconStyle:{
+        width:25,
+        height:25
+    },
+})
 // 配置 导航栏标题，选项卡 标题 选中图标  未选中图标,选种颜色，未选中颜色,
 function config_tab(component,title,tabBarLabel,tabSelected,tabUnSelected) {
     return {
@@ -40,25 +50,41 @@ function config_tab(component,title,tabBarLabel,tabSelected,tabUnSelected) {
 }
 const TabBar = TabNavigator(
     {
-        home_page:config_tab(Home_Page,"推荐","推荐","tabASelected","tabADeselected"),
-        menu_page: config_tab(Menu_Page,"分类","分类","tabBSelected","tabBDeselected"),
-        profile_page: config_tab(Profile_Page,"我","我","tabESelected","tabEDeselected")
+        home_page:config_tab(Home_Page,"推荐","推荐","tab_home_selected","tab_home_deselected"),
+        menu_page: config_tab(Menu_Page,"分类","分类","tab_menu_selected","tab_menu_deselected"),
+        profile_page: config_tab(Profile_Page,"我","我","tab_profile_selected","tab_profile_deselected")
     },
     {
-    tabBarOptions: {
+        tabBarOptions: {
+            style: {
+                height:49,
+                backgroundColor:'#fff'
+            },
+            indicatorStyle:{
+                height:0,
+            },
+            showIcon:true,
+            activeTintColor:common_theme.themeColor,
+            inactiveTintColor:'#4A4944',
+            showLabel:true,
+            labelStyle:{
+                fontSize:11,
+                marginTop:1,
+                marginBottom:0
+            },
+            activeTintColor:common_theme.themeColor,
+            inactiveTintColor:"#4A4944",
+            activeBackgroundColor:'#fff',
+            inactiveBackgroundColor:'#fff',
+        },
+
+        tabBarPosition: 'bottom',
         animationEnabled: false, // 切换页面时不显示动画
-        tabBarPosition: 'bottom', // 显示在底端，android 默认是显示在页面顶端的
         swipeEnabled: false, // 禁止左右滑动
         backBehavior: 'none', // 按 back 键是否跳转到第一个 Tab， none 为不跳转
-        activeBackgroundColor:'#fff',
-        inactiveBackgroundColor:'#fff',
-        activeTintColor:common_theme.themeColor,
-        inactiveTintColor:'#4A4944',
-        showLabel:true,
-        labelStyle:{
-            fontSize:11
-        }
-    }
+
+
+
 })
 // 导航栏的样式
 export const navigationOptions = {
@@ -66,7 +92,8 @@ export const navigationOptions = {
     headerBackTitle: null,
     headerTintColor:"#fff",
     headerStyle:{
-        backgroundColor:common_theme.themeColor
+        backgroundColor:common_theme.themeColor,
+        height:common_theme.navigationBarHeight, // 导航栏高度
     },
     headerTitleStyle:{
 
@@ -92,17 +119,6 @@ const Routers = StackNavigator(
     }
 )
 
-//
-const styles = StyleSheet.create({
-    iconBigStyle:{
-        width:28,
-        height:28
-    },
-    iconStyle:{
-        width:25,
-        height:25
-    },
-})
 export default Routers;
 
 

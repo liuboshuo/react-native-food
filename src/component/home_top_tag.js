@@ -16,7 +16,6 @@ class Home_Top_Tag extends Component{
 
     renderColumnItem(data){
         const {top_tags}=this.props;
-        const row = (top_tags.length + 1) / numColumns;
 
         let separatorStyle = {}
         if ((data.index+1) % numColumns == 0 ){
@@ -34,9 +33,11 @@ class Home_Top_Tag extends Component{
         }
 
         return (
-            <View style={[separatorStyle,styles.tagButtonView]}>
+            <TouchableOpacity activeOpacity={1}
+                              style={[separatorStyle,styles.tagButtonView]}
+            >
                 <Text style={styles.blackTextStyle}>{data.item.name}</Text>
-            </View>
+            </TouchableOpacity>
         )
     }
     render(){
