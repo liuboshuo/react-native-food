@@ -157,4 +157,9 @@
  *  @return <#return value description#>
  */
 - (nullable NSString *)stringByTrim;
+
++(nullable NSString *)getAppId;
++(nullable NSString *)getAppVersion;
+
+
 @end

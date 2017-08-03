@@ -8,6 +8,8 @@
 
 #import "NSString+Category.h"
 #import "NSData+Category.h"
+#include <sys/sysctl.h>
+#import <UIKit/UIKit.h>
 
 @implementation NSString (Category)
 
@@ -321,5 +323,15 @@
 - (NSString *)stringByTrim {
     NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     return [self stringByTrimmingCharactersInSet:set];
+}
+
++(NSString *)getAppId{
+  NSString *appId = [[NSBundle mainBundle] bundleIdentifier];
+  return appId;
+}
++(NSString *)getAppVersion{
+  NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+  NSString *app_version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+  return app_version;
 }
 @end

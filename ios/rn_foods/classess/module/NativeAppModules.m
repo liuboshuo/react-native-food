@@ -9,7 +9,7 @@
 #import "NativeAppModules.h"
 #import "LSProjectUtils.h"
 #import "LSViewControllerUtils.h"
-
+#import "NSString+Category.h"
 @interface NativeAppModules ()<UIActionSheetDelegate>
 
 @end
@@ -47,11 +47,10 @@ RCT_REMAP_METHOD(getAppInfos,
 
   NSDictionary * result = @{
 														@"brand" : @"Apple",
-														@"model" : @"",
-														@"imei":"fsdf", //手机的device_id
 														@"server_host" : ServerURL,
-														@"appId" : @"",
-														@"version" : @""
+														@"appId" : [NSString getAppId],
+														@"version" : [NSString getAppVersion],
+                            @"appKey" : AppKey
 														};
 		
   resolve(result);

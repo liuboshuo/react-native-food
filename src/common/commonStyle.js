@@ -7,7 +7,7 @@ export const common_theme = {
 
     screenHeight:Dimensions.get('window').height,
 
-    themeColor:'#F20033',
+    themeColor:'#E44C3D',
 
     full_view_background_color:'#EEEEEE',
 
@@ -20,7 +20,7 @@ export const common_theme = {
 
 
     titleFontSize:15,
-    titleColor:'#666',
+    titleColor:'#4A4944',
 
     subTitleFontSize:14,
     subTitleColor:'#7d7d7d',
@@ -28,16 +28,8 @@ export const common_theme = {
     thirdFontSize:13,
     thirdTextColor:'#eee',
 
-    cellLeftPadding:10,
-
-    cellRightPadding:10,
-
-    cellTopPadding:10,
-
-    cellBottomPadding:10,
 
     separatorWidth:1,
-
     separatorColor:'#E9E9E9',
 
 
@@ -52,11 +44,11 @@ export const common_theme = {
 
 
 export const commonStyle = {
-    full_view_nav_tabBar_style:{
+    full_view_nav_tabBar_style: {
         flex: 1,
         backgroundColor: common_theme.full_view_background_color,
         paddingTop: common_theme.navigationBarHeight,
-        paddingBottom:common_theme.tabBarHeight
+        paddingBottom: common_theme.tabBarHeight
     },
     full_view_nav_style: {
         flex: 1,
@@ -66,13 +58,33 @@ export const commonStyle = {
     full_view_hide_tabBar_style: {
         flex: 1,
         backgroundColor: common_theme.full_view_background_color,
-        paddingBottom:common_theme.tabBarHeight
+        paddingBottom: common_theme.tabBarHeight
     },
     full_view_navBar_hide_style: {
         flex: 1,
         backgroundColor: common_theme.full_view_background_color,
     },
-    rowCell:{
-        flexDirection:"row",
-    }
+    rowCell: {
+        flexDirection: "row",
+    },
+
+    titleFontStyle: {
+        fontSize: common_theme.titleFontSize,
+        color:  common_theme.titleColor,
+    },
+    subTitleFontStyle: {
+        fontSize: common_theme.subTitleFontSize,
+        color:  common_theme.subTitleColor,
+    },
+    thirdFontStyle: {
+        fontSize: common_theme.thirdFontSize,
+        color:  common_theme.thirdTextColor,
+    },
+
+    separatorStyle:{
+        borderBottomColor:common_theme.separatorColor,
+        borderBottomWidth:common_theme.separatorWidth,
+    },
+
+
 };

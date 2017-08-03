@@ -1,6 +1,6 @@
 import {Alert} from 'react-native'
 import {hideHud} from "../utils/util";
-
+import qs from 'qs'
 // 初始化的数据参数
 let config = {}
 
@@ -22,8 +22,10 @@ export function server_config(env) {
     if(env == null || env == undefined){
         return;
     }
-    return {
-        ...config
+    config = {
+        ...config,
+        appKey:env.appKey,
+        server_host:env.server_host
     }
 }
 
@@ -33,7 +35,9 @@ export class HttpError {
         this.status_code = status_code;
     }
 }
-
+function configURL(url) {
+    return config.server_host + url
+}
 //服务出错
 export function defaultOnServerError(error_code,message) {
     const msg = message || server_error_message(error_code) || "服务器异常！！"
@@ -64,7 +68,10 @@ function checkStatus(response) {
 }
 //请求
 export function get(url,params,onSuccess,onServerError=defaultOnServerError,onNetWorkError=defaultOnNetWorkError) {
-    return request("GET",url,params,onSuccess,onServerError,onNetWorkError)
+    params["key"] = config.appKey;
+    const string = qs.stringify(params,{ arrayFormat: 'brackets'});
+    const path = params ? url +"?"+ string : url;
+    return request("GET",path,params,onSuccess,onServerError,onNetWorkError)
 }
 
 //请求
@@ -74,7 +81,7 @@ export function post(url,params,onSuccess,onServerError=defaultOnServerError,onN
 
 export function request(method,url,params,onSuccess,onServerError=defaultOnServerError,onNetWorkError=defaultOnNetWorkError) {
 
-    return fetch(url,{
+    return fetch(configURL(url),{
         method:method,
         headers:{},
         data:method == 'GET' ? null : JSON.stringify(params)

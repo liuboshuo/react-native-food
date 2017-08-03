@@ -13,7 +13,9 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 
-#define ServerURL @"skldfnsl"
+#define ServerURL @"http://apis.juhe.cn"
+#define AppKey @"3da1a3e8afd28eb679c98130e46bb5db---"
+
 
 #ifdef DEBUG // 处于开发阶段
 
