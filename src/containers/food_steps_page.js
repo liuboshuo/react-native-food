@@ -2,7 +2,8 @@ import React from 'react'
 import {
     View,
     TouchableOpacity,
-    Text
+    Text,
+    StyleSheet
 } from 'react-native'
 
 export default class Food_Steps_Page extends React.Component{
@@ -11,7 +12,7 @@ export default class Food_Steps_Page extends React.Component{
         return(
             <View style={styles.container}>
                 <TouchableOpacity>
-                    <Text>详细信息</Text>
+                    <Text></Text>
                 </TouchableOpacity>
             </View>
         )

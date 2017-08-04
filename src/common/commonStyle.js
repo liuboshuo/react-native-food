@@ -33,6 +33,12 @@ export const common_theme = {
     separatorColor:'#E9E9E9',
 
 
+    viewMPLeft:10,
+    viewMPRight:10,
+
+    viewMPTop:6,
+    viewMPBottom:6,
+
     sectionMarginPadding:15,
 
     cellHeight:44,
@@ -86,5 +92,37 @@ export const commonStyle = {
         borderBottomWidth:common_theme.separatorWidth,
     },
 
-
+    rowCenter:{
+        flexDirection:'row',
+        justifyContent:"center",
+        alignItems:'center'
+    },
+    rowSpaceAround:{
+        flexDirection:'row',
+        justifyContent:"space-around",
+        alignItems:'center'
+    },
+    rowSpaceBetween:{
+        flexDirection:'row',
+        justifyContent:"space-between",
+        alignItems:'center'
+    },
+    row:{
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    column:{
+        flexDirection:'column',
+        alignItems:'center'
+    },
+    columnSpaceBetween:{
+        flexDirection:'column',
+        justifyContent:"space-between",
+        alignItems:'center'
+    },
+    columnSpaceAround:{
+        flexDirection:'column',
+        justifyContent:'space-around',
+        alignItems:'center',
+    }
 };

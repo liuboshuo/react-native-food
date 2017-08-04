@@ -8,6 +8,16 @@ import {
 import {connect} from 'react-redux'
 
 class Food_List_Page extends React.Component {
+    // 页面自定义导航栏
+    static navigationOptions = (navigation)=>{
+        console.log(navigation)
+        const {params} = navigation.navigation.state;
+        return(
+            {
+                title:params.select_tag.name
+            }
+        )
+    }
     render (){
         return (
             <View style={styles.container}>

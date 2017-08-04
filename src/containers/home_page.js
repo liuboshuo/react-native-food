@@ -15,6 +15,7 @@ import {common_theme} from "./../common/commonStyle";
 import Button from "./../common/component/button";
 import Home_Top_Tag from './../component/home_top_tag'
 import Home_Com from "../component/home_com";
+import {commonStyle} from "../common/commonStyle";
 const scrollEventThrottle = 1;
 class Home_Page extends React.Component {
 
@@ -41,6 +42,11 @@ class Home_Page extends React.Component {
                 toValue:y/maxY,
                 duration:scrollEventThrottle
             }).start()
+        }else {
+            Animated.timing(this.state.topViewOpacity,{
+                toValue:1,
+                duration:scrollEventThrottle
+            }).start()
         }
     }
     componentDidMount() {
@@ -49,13 +55,19 @@ class Home_Page extends React.Component {
         dispatch(getTagDatas())
         dispatch(getMainDatas())
     }
-
+    push_food_list(select_tag){
+        const {navigate} = this.props.navigation;
+        navigate("food_list",{select_tag:select_tag})
+    }
+    push_food_step(select_item){
+        const {navigate} = this.props.navigation;
+        navigate("food_step",{select_item:select_item})
+    }
     render (){
         const {top_banners,top_tags,main_data} = this.props;
-        const {navigate} = this.props.navigation;
         return (
             <View style={styles.container}>
-                <Animated.View style={[styles.navigationBar,{
+                <Animated.View style={[commonStyle.rowCenter,styles.navigationBar,{
                     opacity:this.state.topViewOpacity.interpolate({
                         inputRange:[0,1],
                         outputRange:[0,1]
@@ -73,10 +85,10 @@ class Home_Page extends React.Component {
                             onScroll={this.onScroll.bind(this)}
                             scrollEventThrottle={scrollEventThrottle}>
                     {/**/}
-                    <Home_Top_Banner top_banners={top_banners}/>
-                    <Home_Top_Tag top_tags={top_tags}/>
+                    <Home_Top_Banner top_banners={top_banners} topBannerOnClick={this.push_food_step.bind(this)}/>
+                    <Home_Top_Tag top_tags={top_tags} topTagOnClick={this.push_food_list.bind(this)}/>
 
-                    <Home_Com main_data={main_data}/>
+                    <Home_Com main_data={main_data} bottomFoodOnClick={null}/>
 
                 </ScrollView>
             </View>
@@ -94,9 +106,6 @@ const styles = StyleSheet.create({
         backgroundColor:"#ffffff"
     },
     navigationBar:{
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'center',
         position:'absolute',
         left:0,
         top:0,

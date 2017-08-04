@@ -15,7 +15,7 @@ const numColumns = 4
 class Home_Top_Tag extends Component{
 
     renderColumnItem(data){
-        const {top_tags}=this.props;
+        const {top_tags,topTagOnClick}=this.props;
 
         let separatorStyle = {}
         if ((data.index+1) % numColumns == 0 ){
@@ -33,8 +33,9 @@ class Home_Top_Tag extends Component{
         }
 
         return (
-            <TouchableOpacity activeOpacity={1}
-                              style={[separatorStyle,styles.tagButtonView]}
+            <TouchableOpacity activeOpacity={0.1}
+                              style={[separatorStyle,styles.tagButtonView,commonStyle.rowCenter]}
+                              onPress={()=>topTagOnClick(data.item)}
             >
                 <Text style={styles.blackTextStyle}>{data.item.name}</Text>
             </TouchableOpacity>
@@ -42,14 +43,13 @@ class Home_Top_Tag extends Component{
     }
     render(){
         const {top_tags}=this.props;
-        appLog(top_tags);
         if (top_tags.length){
             top_tags.push({
                 name:"更多"
             })
             return (
                 <View style={styles.container}>
-                    <View style={[styles.titleView,commonStyle.separatorStyle]}>
+                    <View style={[styles.titleView,commonStyle.row,commonStyle.separatorStyle]}>
                         <Text style={commonStyle.titleFontStyle}>{"热门分类"}</Text>
                     </View>
                     <View>
@@ -75,10 +75,8 @@ const styles = StyleSheet.create({
 
     },
     titleView:{
-        paddingLeft:10,
+        paddingLeft:common_theme.viewMPLeft,
         height:30,
-        flexDirection:"row",
-        alignItems:'center',
         backgroundColor:'#f3f3f3'
     },
     flatList:{
@@ -87,11 +85,8 @@ const styles = StyleSheet.create({
     tagButtonView:{
         width:common_theme.screenWidth / numColumns,
         height:40,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
     },
     blackTextStyle:{
-        fontSize:common_theme.subTitleFontSize
+        fontSize:common_theme.subTitleFontSize,
     }
 })

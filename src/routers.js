@@ -11,6 +11,7 @@ import {StackNavigator,TabNavigator} from 'react-navigation'
 import React from 'react'
 import {StyleSheet,Image} from 'react-native';
 import {common_theme} from "./common/commonStyle";
+import Food_Steps_Page from "./containers/food_steps_page";
 
 
 const styles = StyleSheet.create({
@@ -57,7 +58,7 @@ const TabBar = TabNavigator(
     {
         tabBarOptions: {
             style: {
-                height:49,
+                height:common_theme.tabBarHeight,
                 backgroundColor:'#fff'
             },
             indicatorStyle:{
@@ -76,8 +77,9 @@ const TabBar = TabNavigator(
             inactiveTintColor:"#4A4944",
             activeBackgroundColor:'#fff',
             inactiveBackgroundColor:'#fff',
+            lazy:false
         },
-
+        lazy:false,
         tabBarPosition: 'bottom',
         animationEnabled: false, // 切换页面时不显示动画
         swipeEnabled: false, // 禁止左右滑动
@@ -113,6 +115,10 @@ const Routers = StackNavigator(
             screen:Food_List_Page,
             navigationOptions:{...navigationOptions}
         },
+        food_step:{
+            screen:Food_Steps_Page,
+            navigationOptions:{...navigationOptions}
+        }
     },
     {
         //cardStyle:"" 自定义动画，跳转

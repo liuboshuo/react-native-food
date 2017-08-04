@@ -41,15 +41,63 @@ export function getMainDatas() {
 
 export function getAllTagData(){
     return (dispatch,getState)=>{
-        //随机三个
-        const allDataTags = allTagDatas.result
+
         dispatch({
-            type:ActionTypes.Menu_AllTagsData,
+            type:ActionTypes.Menu_Update_LoadTags,
             data:{
-                tags_data:Immutable.fromJS(allDataTags)
+                menu_tag_refreshing:true
+            }
+        })
+        setTimeout(()=>{
+            //随机三个
+            const allDataTags = allTagDatas.result
+
+            const tags = [];
+            for (let i=0;i<allDataTags.length;i++){
+                const data = allDataTags[i];
+                data["key"] = data.name;
+                data["isOpen"] = true;
+                tags.push(data);
+                for (let j=0;j<data.list.length;j++){
+                    const food = data.list[j];
+                    food["key"] = food.id;
+                }
+                data["data"] = data.list;
+            }
+
+            dispatch({
+                type:ActionTypes.Menu_AllTagsData,
+                data:{
+                    tags_data:Immutable.fromJS(tags),
+                    menu_tag_refreshing:false
+                }
+            })
+        },2000)
+
+    }
+}
+export function changeTag(left_tag_select_index){
+    return (dispatch,getState)=>{
+        dispatch({
+            type:ActionTypes.Menu_ChangeTag,
+            data:{
+                left_tag_select_index:left_tag_select_index
             }
         })
     }
+}
+
+export function changeOpen(isOpen,index) {
+    return (dispatch,getState)=>{
+        dispatch({
+            type:ActionTypes.Menu_ChangeFlatOpen,
+            data:{
+                isOpen:isOpen,
+                index:index
+            }
+        })
+    }
+
 }
 export function getTagDatas() {
 

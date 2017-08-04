@@ -13,12 +13,11 @@ import NetWorkImage from "../common/component/netWorkImage";
 
 const numColumns = 2
 
-const contentMargin = 15
+const contentMargin = common_theme.viewMPLeft
+
 class Home_Com extends Component{
 
     renderColumnItem(data){
-        const {main_data}=this.props;
-
         let separatorStyle = {}
         if ((data.index+1) % numColumns == 0 ){
             separatorStyle = {
@@ -30,15 +29,16 @@ class Home_Com extends Component{
                 marginLeft:contentMargin,
             }
         }
-
+        const {bottomFoodOnClick} = this.props;
         return (
-            <TouchableOpacity activeOpacity={1}
-                              style={[separatorStyle,styles.contentButtonView]}
+            <TouchableOpacity activeOpacity={0.1}
+                              style={[separatorStyle,styles.contentButtonView,commonStyle.rowCenter]}
+                              onPress={()=>bottomFoodOnClick(data.item)}
             >
                 <NetWorkImage uri={data.item.albums[0]}
                               style={styles.albumStyle}
                 />
-                <View style={styles.textView}>
+                <View style={[styles.textView,commonStyle.rowCenter,{}]}>
                     <Text style={styles.whiteTextStyle}>{data.item.title}</Text>
                 </View>
             </TouchableOpacity>
@@ -46,11 +46,10 @@ class Home_Com extends Component{
     }
     render(){
         const {main_data}=this.props;
-        appLog(main_data);
         if (main_data.length){
             return (
                 <View style={styles.container}>
-                    <View style={[styles.titleView,commonStyle.separatorStyle]}>
+                    <View style={[styles.titleView,commonStyle.row,commonStyle.separatorStyle]}>
                         <Text style={commonStyle.titleFontStyle}>{"热门分类"}</Text>
                     </View>
                     <View>
@@ -77,10 +76,8 @@ const styles = StyleSheet.create({
 
     },
     titleView:{
-        paddingLeft:10,
+        paddingLeft:common_theme.viewMPLeft,
         height:30,
-        flexDirection:"row",
-        alignItems:'center',
         backgroundColor:'#f3f3f3'
     },
     flatList:{
@@ -88,10 +85,7 @@ const styles = StyleSheet.create({
     },
     contentButtonView:{
         width:(common_theme.screenWidth - (numColumns+1) * contentMargin) / numColumns,
-        height:100,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
+        height:150,
         marginTop:contentMargin,
     },
     whiteTextStyle:{
@@ -101,9 +95,6 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     textView:{
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
         position:'absolute',
         bottom:0,
         left:0,
@@ -113,6 +104,6 @@ const styles = StyleSheet.create({
     },
     albumStyle:{
         width:(common_theme.screenWidth - (numColumns+1) * contentMargin) / numColumns,
-        height:100,
+        height:150,
     }
 })

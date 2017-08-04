@@ -9,7 +9,8 @@ import {
 } from 'react-native'
 import {common_theme} from "./../common/commonStyle";
 import Swiper from 'react-native-swiper'
-import NetWorkImage from "../common/component/netWorkImage";
+import NetWorkImage from "./../common/component/netWorkImage";
+import {commonStyle} from "./../common/commonStyle";
 
 class Home_Top_Banner extends Component{
 
@@ -27,7 +28,7 @@ class Home_Top_Banner extends Component{
             dots.push(<View key={top_banners[i].id} style={dot}/>)
         }
         return(
-            <View style={styles.paginationStyle}>
+            <View style={[styles.paginationStyle,commonStyle.rowSpaceBetween]}>
 
                 <View style={{flexDirection:'row',alignItems:"center"}}>
                     <Text style={styles.title}>{top_banners[index].title}</Text>
@@ -39,10 +40,11 @@ class Home_Top_Banner extends Component{
         )
     }
     render(){
-        const {top_banners} = this.props;
+        const {top_banners,topBannerOnClick} = this.props;
         const banners = top_banners.map((item,index)=>{
             return <TouchableOpacity key={index}
-                               activeOpacity={1}>
+                               activeOpacity={0.1}
+                                     onPress={()=>{topBannerOnClick(top_banners[index])}}>
                 <NetWorkImage   style={styles.imageStyle}
                                 uri={item.albums[0]}/>
 
@@ -70,16 +72,13 @@ const styles = StyleSheet.create({
         height:height,
     },
     paginationStyle:{
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'space-between',
         position:'absolute',
         bottom:0,
         height:40,
         width:common_theme.screenWidth,
         backgroundColor:"rgba(0,0,0,0.2)",
-        paddingLeft:5,
-        paddingRight:5,
+        paddingLeft:common_theme.viewMPLeft / 2,
+        paddingRight:common_theme.viewMPRight / 2,
     },
     title:{
         color:"#fff",
