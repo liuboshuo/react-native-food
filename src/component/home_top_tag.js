@@ -37,7 +37,10 @@ class Home_Top_Tag extends Component{
                               style={[separatorStyle,styles.tagButtonView,commonStyle.rowCenter]}
                               onPress={()=>topTagOnClick(data.item)}
             >
-                <Text style={styles.blackTextStyle}>{data.item.name}</Text>
+                <Text style={styles.blackTextStyle}
+                      numberOfLines={1}>
+                    {data.item.name}
+                </Text>
             </TouchableOpacity>
         )
     }

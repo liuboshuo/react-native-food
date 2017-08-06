@@ -14,8 +14,8 @@ import Home_Top_Banner from "./../component/home_top_banner";
 import {common_theme} from "./../common/commonStyle";
 import Button from "./../common/component/button";
 import Home_Top_Tag from './../component/home_top_tag'
-import Home_Com from "../component/home_com";
-import {commonStyle} from "../common/commonStyle";
+import Home_Com from "./../component/home_com";
+import {commonStyle} from "./../common/commonStyle";
 const scrollEventThrottle = 1;
 class Home_Page extends React.Component {
 
@@ -63,6 +63,10 @@ class Home_Page extends React.Component {
         const {navigate} = this.props.navigation;
         navigate("food_step",{select_item:select_item})
     }
+    startSearch(){
+        const {navigate} = this.props.navigation;
+        navigate("food_list")
+    }
     render (){
         const {top_banners,top_tags,main_data} = this.props;
         return (
@@ -78,7 +82,9 @@ class Home_Page extends React.Component {
                 </Animated.View>
                 <Button style={styles.navigationBarRight}
                         icon={{uri:"icon_top_search"}}
-                        iconStyle={styles.searchIcon} />
+                        iconStyle={styles.searchIcon}
+                        onPress={this.startSearch.bind(this)}
+                />
 
                 {/* 内容 */}
                 <ScrollView style={styles.container}
@@ -88,7 +94,7 @@ class Home_Page extends React.Component {
                     <Home_Top_Banner top_banners={top_banners} topBannerOnClick={this.push_food_step.bind(this)}/>
                     <Home_Top_Tag top_tags={top_tags} topTagOnClick={this.push_food_list.bind(this)}/>
 
-                    <Home_Com main_data={main_data} bottomFoodOnClick={null}/>
+                    <Home_Com main_data={main_data} bottomFoodOnClick={this.push_food_step.bind(this)}/>
 
                 </ScrollView>
             </View>

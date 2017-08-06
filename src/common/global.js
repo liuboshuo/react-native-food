@@ -5,3 +5,8 @@ global.appLog = function (message){
         console.log(message)
     }
 }
+
+//设置全局分页数
+global.pageSize = 30;
+
+

@@ -3,7 +3,10 @@ import homeDatas from './../../api/home.json'
 import allTagDatas from './../../api/category.json'
 import Immutable from 'immutable'
 
-//
+/**
+ *
+ * @returns {function(*, *)}
+ */
 export function getBannerDatas() {
 
     return (dispatch,getState)=>{
@@ -25,6 +28,10 @@ export function getBannerDatas() {
 
 }
 
+/**
+ *
+ * @returns {function(*, *)}
+ */
 export function getMainDatas() {
 
     return (dispatch,getState)=>{
@@ -36,12 +43,14 @@ export function getMainDatas() {
             }
         })
     }
-
 }
 
+/**
+ *
+ * @returns {function(*, *)}
+ */
 export function getAllTagData(){
     return (dispatch,getState)=>{
-
         dispatch({
             type:ActionTypes.Menu_Update_LoadTags,
             data:{
@@ -76,6 +85,12 @@ export function getAllTagData(){
 
     }
 }
+
+/**
+ *
+ * @param left_tag_select_index
+ * @returns {function(*, *)}
+ */
 export function changeTag(left_tag_select_index){
     return (dispatch,getState)=>{
         dispatch({
@@ -87,6 +102,12 @@ export function changeTag(left_tag_select_index){
     }
 }
 
+/**
+ *
+ * @param isOpen
+ * @param index
+ * @returns {function(*, *)}
+ */
 export function changeOpen(isOpen,index) {
     return (dispatch,getState)=>{
         dispatch({
@@ -97,8 +118,12 @@ export function changeOpen(isOpen,index) {
             }
         })
     }
-
 }
+
+/**
+ * 
+ * @returns {function(*, *)}
+ */
 export function getTagDatas() {
 
     return (dispatch,getState)=>{

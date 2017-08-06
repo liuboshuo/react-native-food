@@ -81,11 +81,11 @@ const styles = StyleSheet.create({
         backgroundColor:'#f3f3f3'
     },
     flatList:{
-
+        flex:1,
     },
     contentButtonView:{
         width:(common_theme.screenWidth - (numColumns+1) * contentMargin) / numColumns,
-        height:150,
+        height:190,
         marginTop:contentMargin,
     },
     whiteTextStyle:{
@@ -100,10 +100,15 @@ const styles = StyleSheet.create({
         left:0,
         width:(common_theme.screenWidth - (numColumns+1) * contentMargin) / numColumns,
         height:20,
-        backgroundColor:'rgba(0,0,0,0.3)'
+        backgroundColor:'rgba(0,0,0,0.3)',
+        overflow:"hidden",
+        borderBottomRightRadius:5,
+        borderBottomLeftRadius:5,
     },
     albumStyle:{
         width:(common_theme.screenWidth - (numColumns+1) * contentMargin) / numColumns,
-        height:150,
+        height:190,
+        borderRadius:5,
+        overflow:"hidden"
     }
 })

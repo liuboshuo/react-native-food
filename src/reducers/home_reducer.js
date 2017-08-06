@@ -6,7 +6,7 @@ const initialState = Immutable.Map({
     main_data:Immutable.List(),
     tags_data:Immutable.List(),
     menu_tag_refreshing:false,
-    show_tag_default_view:false,
+    show_tag_default_view:true,
     left_tag_select_index:0
 })
 
@@ -38,7 +38,8 @@ function menu_change_flat_open(state,data) {
     let tags_data = state.get("tags_data");
     let tag_data = tags_data.get(data.index);
     tag_data = tag_data.set("isOpen",!data.isOpen);
-    return state;
+    tags_data = tags_data.set(data.index,tag_data)
+    return state.set("tags_data",tags_data);
 }
 const tables = {
     "Home_GetBannerData": get_home_top_banners,

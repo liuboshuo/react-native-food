@@ -100,8 +100,8 @@ class Menu_Page extends React.Component {
         return (
             <View style={styles.container}>
                 <NavigationBar title={"分类"}
-                               leftTitle={"切换"}
                                leftAction={()=>this.changeViewType()}
+                               leftImage={{uri:"icon_change"}}
                 />
                 <ScrollView style={styles.container}
                             refreshControl={<RefreshControl

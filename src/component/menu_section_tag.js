@@ -27,7 +27,7 @@ class Menu_All_Tag extends React.Component{
                               style={[styles.tagButtonView,commonStyle.rowCenter,style]}
             >
                 <View style={[styles.innerTagView,commonStyle.rowCenter]}>
-                    <Text style={[styles.blackTextStyle,style]}>{data.item.name}</Text>
+                    <Text numberOfLines={1} style={[styles.blackTextStyle,style]}>{data.item.name}</Text>
                 </View>
             </TouchableOpacity>
         )
@@ -35,23 +35,35 @@ class Menu_All_Tag extends React.Component{
 
     render(){
         const {key,tag,columns,index,changeStatus} = this.props;
-        appLog(changeStatus)
         let showTitleView= this.props.showTitleView;
         if(showTitleView == undefined) showTitleView = true;
         return(
             <View style={styles.container} key={key?key:"key"}>
                 {showTitleView ? <View style={[styles.titleView, commonStyle.rowSpaceBetween]}>
                     <Text style={commonStyle.titleFontStyle}>{tag.name}</Text>
-                    <Button text={"关闭"}
-                            style={[{width:100,height:40,backgroundColor:"transparent"},commonStyle.rowCenter]}
+                    <Button icon={tag.isOpen?{uri:"icon_down"}:{uri:'icon_close'}}
+                            style={[styles.closeButtonStyle,commonStyle.rowCenter]}
+                            iconStyle={styles.iconStyle}
                             onPress={()=>changeStatus(tag.isOpen,index)}/>
                 </View> : null
                 }
-                <FlatList style={styles.flatList}
-                          data={tag.data}
-                          renderItem={this.renderColumnItem.bind(this)}
-                          numColumns={columns}
-                />
+
+
+                {!showTitleView ?
+                    <FlatList style={styles.flatList}
+                              data={tag.data}
+                              renderItem={this.renderColumnItem.bind(this)}
+                              numColumns={columns}
+                    />
+                    :
+                    tag.isOpen ? <FlatList style={styles.flatList}
+                                            data={tag.data}
+                                            renderItem={this.renderColumnItem.bind(this)}
+                                            numColumns={columns}
+                    /> : null
+                }
+
+
             </View>
         )
     }
@@ -92,7 +104,16 @@ const styles = StyleSheet.create({
         paddingRight:6,
         backgroundColor:'transparent',
         overflow:'hidden'
+    },
+    closeButtonStyle:{
+        backgroundColor:"transparent"
+    },
+    iconStyle:{
+        width:25,
+        height:25,
+        paddingRight:3
     }
+
 })
 function mapDispatchToProps(dispatch) {
     return {
