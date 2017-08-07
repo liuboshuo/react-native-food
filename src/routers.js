@@ -24,7 +24,8 @@ const styles = StyleSheet.create({
         height:25
     },
 })
-// 配置 导航栏标题，选项卡 标题 选中图标  未选中图标,选种颜色，未选中颜色,
+
+// 定义tab 配置 导航栏标题，选项卡 标题 选中图标  未选中图标,选种颜色，未选中颜色,
 function config_tab(component,title,tabBarLabel,tabSelected,tabUnSelected) {
     return {
         screen:component,
@@ -55,6 +56,8 @@ const TabBar = TabNavigator(
         menu_page: config_tab(Menu_Page,"分类","分类","tab_menu_selected","tab_menu_deselected"),
         profile_page: config_tab(Profile_Page,"我","我","tab_profile_selected","tab_profile_deselected")
     },
+
+    // tab config
     {
         tabBarOptions: {
             style: {
@@ -88,6 +91,8 @@ const TabBar = TabNavigator(
 
 
 })
+
+
 // 导航栏的样式
 export const navigationOptions = {
     // header:null,//设置null 导航条隐藏header
@@ -104,22 +109,27 @@ export const navigationOptions = {
 
     }
 }
-//导航
+
+//APP 导航
 const Routers = StackNavigator(
     {
+        // 底部tab
         tabs:{
             screen:TabBar,
             navigationOptions: {...navigationOptions}
         },
+        // 列表
         food_list:{
             screen:Food_List_Page,
             navigationOptions:{...navigationOptions}
         },
+        // 菜谱详情
         food_step:{
             screen:Food_Steps_Page,
             navigationOptions:{...navigationOptions}
         }
     },
+    // other config
     {
         //cardStyle:"" 自定义动画，跳转
     }
