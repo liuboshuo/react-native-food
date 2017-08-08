@@ -52,6 +52,7 @@ export const Food_List_Refreshing_Data = "Food_List_Refreshing_Data";
 
 export const Food_List_Loading_Data = "Food_List_Loading_Data"
 
-export const Food_Like_Load_Data = "Food_List_Refreshing_Data";
+export const Food_Like_Load_Data = "Food_Like_Load_Data";
 
-export const Food_Browser_Load_Data = "Food_List_Loading_Data"
+export const Food_Browser_Load_Data = "Food_Browser_Load_Data"
+

@@ -13,7 +13,6 @@ export default class Food_Detail_Tags extends Component {
             <View style={styles.rightBottom}>
                 {
                     tags.map((tag,index)=>{
-                        appLog(index)
                         return (
                             <View key={index} style={[commonStyle.row,styles.tagView]}>
                                 <Text style={styles.textTagStyle}>

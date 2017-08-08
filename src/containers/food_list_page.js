@@ -3,6 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
+    Image,
     FlatList,
     TouchableOpacity,
     TextInput
@@ -28,29 +29,38 @@ class Food_List_Page extends React.Component {
         this.state = {
             text:null
         }
+        this.searching = false;
     }
-    componentDidMount() {
+    componentWillMount() {
         const {params} = this.props.navigation.state;
-
-        if (params){
-            const {select_tag} = params;
-            this.setState({
-                text:select_tag.name
-            })
-            this.onRefresh(select_tag.name);
-        }else {
-            this.textInput.focus()
+        if (!params){
+            this.searching = true;
         }
     }
-    startSearch(){
-        const text = this.textInput.value;
-        this.onRefresh(text);
-        this.textInput.blur()
+    componentDidMount() {
+        this.onRefresh()
     }
-    onRefresh(searchText){
+    startSearch(){
+        this.textInput.blur()
+        const text = this.textInput._lastNativeText;
+        if (text && text.length){
+            this.searching = true;
+            this.onRefresh();
+        }
+    }
+    onRefresh(){
+        const {params} = this.props.navigation.state;
         const dispatch = this.props.dispatch;
-        appLog(searchText)
-        dispatch(load_food_list_data(searchText));
+        const {rn} = this.props;
+        if (!this.searching){
+            const {select_tag} = params;
+            dispatch(load_food_list_data(null,select_tag.id,rn));
+        }else {
+            const text = this.textInput._lastNativeText
+            if (text){
+                dispatch(load_food_list_data(text,null,rn));
+            }
+        }
     }
     renderItem(item){
         let tags = item.item.tags.split(";");
@@ -65,7 +75,7 @@ class Food_List_Page extends React.Component {
                     <Text numberOfLines={3} style={[commonStyle.subTitleFontStyle,styles.textStyle]}>{item.item.imtro}</Text>
                     <Food_Detail_Tags tags={tags} />
                 </View>
-                <NetWorkImage uri={"icon_right"} style={{width:15,height:10}}/>
+                <Image source={{uri:"icon_right"}} style={{width:15,height:10}}/>
             </TouchableOpacity>
         )
     }
@@ -80,12 +90,41 @@ class Food_List_Page extends React.Component {
             </View>
         )
     }
+    onEndReached(){
+        const {isRefreshing,loading} = this.props;
+        if (isRefreshing || loading != 0 ){
+            return;
+        }
+        this.onRefresh()
+    }
+    renderFooterView(){
+        const {isRefreshing,loading} = this.props;
+        let text=""
+        if (loading == 1){
+            text = "正在加载中..."
+        }else if (loading == 0){
+            text = "上拉加载更多"
+        }else if (loading == 2){
+            text = "加载完毕"
+        }else if (loading == 3){
+            text = "暂无数据"
+        }
+        if (isRefreshing){
+            return null
+        }else {
+            return <View style={styles.footer}>
+                <Text style={styles.text}>{text}</Text>
+            </View>
+        }
+
+    }
     pop(){
         const {goBack} = this.props.navigation;
         goBack()
     }
     render (){
-        const {food_list_data,isRefreshing,loading} = this.props;
+        const {food_list_data,isRefreshing} = this.props;
+        const {params} = this.props.navigation.state;
         return (
             <View style={styles.container}>
                 <View style={styles.navigationBar}>
@@ -97,8 +136,9 @@ class Food_List_Page extends React.Component {
 
                     <TextInput ref={ref=>{this.textInput=ref}} placeholder={"输入关键字"}
                                style={styles.titleView}
-                               defaultValue={this.state.text}
+                               defaultValue={this.searching ? this.state.text : params.select_tag.name}
                                androidColorOfUnderLines="transparent"
+
                     />
 
                     <Button style={styles.right_navigation_view}
@@ -108,13 +148,20 @@ class Food_List_Page extends React.Component {
                     />
                 </View>
 
-                <FlatList style={styles.flat}
-                          renderItem={this.renderItem.bind(this)}
-                          data={food_list_data}
-                          onRefresh={()=>{}}
-                          ItemSeparatorComponent={this.itemSeparatorComponent}
-                          refreshing={isRefreshing}
-                />
+                {!this.searching ?
+                    <FlatList style={styles.flat}
+                              renderItem={this.renderItem.bind(this)}
+                              data={food_list_data}
+                              onRefresh={()=>this.onRefresh()}
+                              ItemSeparatorComponent={this.itemSeparatorComponent}
+                              refreshing={isRefreshing}
+                              ListFooterComponent={this.renderFooterView.bind(this)}
+                              onEndReachedThreshold={0}
+                              onEndReached={this.onEndReached.bind(this)}
+                    />
+                    :null
+                }
+
 
             </View>
         )
@@ -219,5 +266,14 @@ const styles = StyleSheet.create({
         fontSize:common_theme.titleFontSize,
         color:common_theme.titleColor,
         paddingLeft:10,
+    },
+    footer:{
+        height:45,
+        alignItems:'center',
+        justifyContent:'center',
+    },
+    text:{
+        fontSize:16,
+        color:common_theme.titleColor
     }
 });

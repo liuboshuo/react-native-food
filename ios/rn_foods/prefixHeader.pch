@@ -14,7 +14,7 @@
 
 
 #define ServerURL @"http://apis.juhe.cn"
-#define AppKey @"3da1a3e8afd28eb679c98130e46bb5db---"
+#define AppKey @"3da1a3e8afd28eb679c98130e46bb5db"
 
 
 #ifdef DEBUG // 处于开发阶段

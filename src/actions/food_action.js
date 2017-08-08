@@ -11,18 +11,18 @@ import {get} from './../common/server'
  * @returns {function(*, *)}
  */
 
-export function load_food_list_data(searchText=null,cid=null,isRefreshing=true,pn=0,rn=pageSize) {
+export function load_food_list_data(searchText=null,cid=null,pageNo=0) {
     return (dispacth,getState)=>{
-        if (isRefreshing){
-            dispacth(food_list_data_change_refreshing(true))
+        if (!pageNo){
+            dispacth(food_list_data_change_refreshing(true,pageNo))
         }else {
-            dispacth(food_list_change_loading(1))
+            dispacth(food_list_change_loading(1,pageNo))
         }
         if (cid==null){
             const dict = {
                 menu:searchText,
-                rn:rn,
-                pn:pn
+                rn:pageSize,
+                pn:pageNo
             }
             get("/cook/query.php",dict,(response)=>{
                 appLog(response);
@@ -32,18 +32,40 @@ export function load_food_list_data(searchText=null,cid=null,isRefreshing=true,p
             },2000);
         }else {
             const dict = {
-                cid:id,
-                rn:rn,
-                pn:pn
+                cid:cid,
+                rn:pageSize,
+                pn:pageNo
             }
-
+            console.log(dict)
                 // /cook/queryid
-            get("cook/index",dict,(response)=>{
+            get("/cook/index",dict,(response)=>{
+                const {result} = response;
+                if (result){
+                    const totalNum = parseInt(result.totalNum);
+                    const pn = parseInt(result.pn);
+                    const rn = parseInt(result.rn);
+                    if (pageNo){
+                        dispacth(food_list_change_loading_data(Immutable.fromJS(result.data),0,(rn+pn)))
+                        if ((pn + rn) >= totalNum ){
+                            dispacth(food_list_change_loading(2,(rn+pn)))
+                        }
+                    }else {
+                        if(result.data && result.data.length){
+                            if ((pn + rn) >= totalNum ){
+                                //加载完毕
+                                dispacth(food_list_change_refresh_data(Immutable.fromJS(result.data),false,0))
+                                dispacth(food_list_change_loading(2,0))
+                            }else {
+                                dispacth(food_list_change_refresh_data(Immutable.fromJS(result.data),false,(rn+pn)))
+                            }
+                        }else {
+                            dispacth(food_list_data_change_refreshing(false,0))
+                            dispacth(food_list_change_loading(3,0))
+                        }
+                    }
+                }
                 appLog(response);
             })
-            setTimeout(()=>{
-                dispacth(food_list_change_refresh_data(Immutable.fromJS(food_list.result.data),false))
-            },2000);
         }
     }
 }
@@ -54,11 +76,12 @@ export function load_food_list_data(searchText=null,cid=null,isRefreshing=true,p
  * @param isRefreshing
  * @returns {{type: string, data: {isRefreshing: *}}}
  */
-function food_list_data_change_refreshing(isRefreshing) {
+function food_list_data_change_refreshing(isRefreshing,rn) {
     return {
         type:ActionTypes.Food_List_Refreshing,
         data:{
-            isRefreshing:isRefreshing
+            isRefreshing:isRefreshing,
+            rn:rn
         }
     }
 }
@@ -70,12 +93,13 @@ function food_list_data_change_refreshing(isRefreshing) {
  * @returns {{type: null, data: {food_list_data: *, loading: *}}}
  */
 
-function food_list_change_loading_data(data,loading) {
+function food_list_change_loading_data(data,loading,rn) {
     return {
         type:ActionTypes.Food_List_Loading_Data,
         data:{
             food_list_data:data,
             loading:loading,
+            rn:rn
         }
     }
 }
@@ -87,12 +111,13 @@ function food_list_change_loading_data(data,loading) {
  * @param isRefreshing
  * @returns {{type, data: {food_list_data: *, isRefreshing: *}}}
  */
-function food_list_change_refresh_data(data,isRefreshing) {
+function food_list_change_refresh_data(data,isRefreshing,rn) {
     return {
         type:ActionTypes.Food_List_Refreshing_Data,
         data:{
             food_list_data:data,
-            isRefreshing:isRefreshing
+            isRefreshing:isRefreshing,
+            rn:rn
         }
     }
 }
@@ -103,11 +128,12 @@ function food_list_change_refresh_data(data,isRefreshing) {
  * @param loading 0: 加载 1, 正在 2,加载完毕 3,暂无数据 4,刷新数据时候 的  错误（显示不同的界面）
  * @returns {{type, data: {loading: *}}}
  */
-function food_list_change_loading(loading) {
+function food_list_change_loading(loading,rn) {
     return {
         type:ActionTypes.Food_List_Loading,
         data:{
-            loading:loading
+            loading:loading,
+            rn:rn
         }
     }
 }
