@@ -43,7 +43,7 @@ class Home_Top_Banner extends Component{
         const {top_banners,topBannerOnClick} = this.props;
         const banners = top_banners.map((item,index)=>{
             return <TouchableOpacity key={index}
-                               activeOpacity={0.1}
+                               activeOpacity={1}
                                      onPress={()=>{topBannerOnClick(top_banners[index])}}>
                 <NetWorkImage   style={styles.imageStyle}
                                 uri={item.albums[0]}/>

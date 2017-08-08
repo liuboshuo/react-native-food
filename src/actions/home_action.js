@@ -58,7 +58,7 @@ export function getAllTagData(){
             }
         })
         setTimeout(()=>{
-            //随机三个
+            //随机三个 /cook/category
             const allDataTags = allTagDatas.result
 
             const tags = [];

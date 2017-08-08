@@ -12,6 +12,7 @@ import React from 'react'
 import {StyleSheet,Image} from 'react-native';
 import {common_theme} from "./common/commonStyle";
 import Food_Steps_Page from "./containers/food_steps_page";
+import Food_Browser_Page from "./containers/food_browser_page";
 
 
 const styles = StyleSheet.create({
@@ -126,6 +127,10 @@ const Routers = StackNavigator(
         // 菜谱详情
         food_step:{
             screen:Food_Steps_Page,
+            navigationOptions:{...navigationOptions}
+        },
+        food_browser:{
+            screen:Food_Browser_Page,
             navigationOptions:{...navigationOptions}
         }
     },

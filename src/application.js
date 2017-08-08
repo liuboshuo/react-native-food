@@ -1,7 +1,7 @@
 import React from 'react'
 import {Provider} from 'react-redux'
 import configureStore from "./store/store";
-import Routers from './routers'
+import Main_Page from './main_page'
 
 export default class Application extends React.Component {
     render (){
@@ -12,7 +12,7 @@ export default class Application extends React.Component {
             <Provider store={store}>
 
                 {/* 路由 */}
-                <Routers />
+                <Main_Page />
 
             </Provider>
         )

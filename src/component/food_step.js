@@ -16,14 +16,16 @@ const numColumns = 2
 class Food_Step_View extends Component{
 
     renderColumnItem(data){
+        const {onClickStepImage,ingredients} = this.props;
         return (
             <View style={styles.tagButtonView}>
                 <Text style={styles.blackTextStyle}>
                     {data.item.step}
                 </Text>
-                <View style={styles.imgView}>
+                <TouchableOpacity activeOpacity={1}  style={styles.imgView}
+                                  onPress={()=>onClickStepImage(ingredients,data.index)}>
                     <NetWorkImage uri={data.item.img} style={styles.img}/>
-                </View>
+                </TouchableOpacity>
             </View>
         )
     }

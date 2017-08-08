@@ -13,11 +13,13 @@ import Food_Ingredient_View from './../component/food_ingredient'
 import Food_Step_View from './../component/food_step'
 import Button from "../common/component/button";
 import Food_Detail_Tags from "./../component/food_detail_tag";
+import {save_browser_food,read_browser_food} from './../actions/food_action'
+import {connect} from 'react-redux'
 
 const scrollEventThrottle = 1;
 
 
-export default class Food_Steps_Page extends React.Component{
+class Food_Steps_Page extends React.Component{
 
     constructor(props){
         super(props)
@@ -35,9 +37,22 @@ export default class Food_Steps_Page extends React.Component{
             }
         )
     }
+
+    componentDidMount() {
+        const {dispatch} = this.props;
+        const {params} = this.props.navigation.state;
+        const {select_item} = params;
+
+        dispatch(read_browser_food())
+        dispatch(save_browser_food(select_item))
+    }
     pop(){
         const {goBack} = this.props.navigation;
         goBack()
+    }
+    foodStepImageDetail(images,index){
+        const {navigate} = this.props.navigation;
+        navigate("food_browser",{datas:images,clickIndex:index})
     }
     onScroll(event){
         const y = event.nativeEvent.contentOffset.y;
@@ -97,7 +112,8 @@ export default class Food_Steps_Page extends React.Component{
                     <Food_Ingredient_View title="辅料" ingredients={select_item.burden.split(";")}/>
 
                     <View style={styles.stepsView}>
-                        <Food_Step_View title={"步骤"} ingredients={select_item.steps}/>
+                        <Food_Step_View
+                            onClickStepImage={this.foodStepImageDetail.bind(this)}title={"步骤"} ingredients={select_item.steps}/>
                     </View>
 
 
@@ -108,6 +124,13 @@ export default class Food_Steps_Page extends React.Component{
         )
     }
 }
+
+
+function mapStateToProps(state) {
+    const {food_reducer} = state;
+    return food_reducer.toJS()
+}
+export default connect(mapStateToProps) (Food_Steps_Page)
 
 const styles = StyleSheet.create({
     container: {

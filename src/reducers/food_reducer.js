@@ -3,7 +3,9 @@ import execute_reducer from "./reducer_helper";
 const initialState = Immutable.Map({
     food_list_data:Immutable.List(),
     loading:0,
-    isRefreshing:false
+    isRefreshing:false,
+    //
+    //
 })
 
 function change_refreshing(state,data) {
