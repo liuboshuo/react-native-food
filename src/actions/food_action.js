@@ -19,32 +19,26 @@ export function load_food_list_data(searchText=null,cid=null,pageNo=0,isRefreshi
         }else {
             dispacth(food_list_change_loading(1,pageNo))
         }
-
-
-
-        dispacth(food_list_change_refresh_data(Immutable.fromJS(food_list.result.data),false,0))
-
-
-        // if (cid==null){
-        //     const dict = {
-        //         menu:searchText,
-        //         rn:pageSize,
-        //         pn:isRefreshing ? 0 : pageNo
-        //     }
-        //     console.log(dict)
-        //     get("/cook/query.php",dict,(response)=>{
-        //        loading_refreshing_food_list(dispacth,response,isRefreshing)
-        //     })
-        // }else {
-        //     const dict = {
-        //         cid:cid,
-        //         rn:pageSize,
-        //         pn:isRefreshing ? 0 : pageNo
-        //     }
-        //     get("/cook/index",dict,(response)=>{
-        //         loading_refreshing_food_list(dispacth,response,isRefreshing)
-        //     })
-        // }
+        if (cid==null){
+            const dict = {
+                menu:searchText,
+                rn:pageSize,
+                pn:isRefreshing ? 0 : pageNo
+            }
+            console.log(dict)
+            get("/cook/query.php",dict,(response)=>{
+               loading_refreshing_food_list(dispacth,response,isRefreshing)
+            })
+        }else {
+            const dict = {
+                cid:cid,
+                rn:pageSize,
+                pn:isRefreshing ? 0 : pageNo
+            }
+            get("/cook/index",dict,(response)=>{
+                loading_refreshing_food_list(dispacth,response,isRefreshing)
+            })
+        }
     }
 }
 
@@ -79,11 +73,8 @@ function loading_refreshing_food_list(dispacth,response,isRefreshing) {
 
 }
 export function load_food_step(id) {
-
     return ((dispatch,getState)=>{
-
         const params = {id:id}
-
         dispatch({
             type:ActionTypes.Food_Refresh_Step,
             data:{
@@ -92,13 +83,25 @@ export function load_food_step(id) {
         })
         get("/cook/queryid",params,(response)=>{
             if (response.result){
+                let {profile_reducer} = getState()
+                profile_reducer = profile_reducer.toJS();
+                const {food_list_like} = profile_reducer;
+                let isExits = false;
+                food_list_like.map(item=>{
+                    if (item.id == response.result.data[0].id){
+                        isExits = true;
+                        return
+                    }
+                })
                 dispatch({
                     type:ActionTypes.Food_Refresh_Step,
                     data:{
                         food_step_refreshing:false,
-                        food_select_item:response.result.data[0]
+                        food_select_item:response.result.data[0],
+                        isLike:isExits
                     }
                 })
+
             }else {
                 dispatch({
                     type:ActionTypes.Food_Refresh_Step,
@@ -110,10 +113,15 @@ export function load_food_step(id) {
 
         })
     })
-
+}
+export function food_list_unmount_clear() {
+    return dispatch=>{
+        dispatch({
+            type:ActionTypes.Food_List_Unmount_Clear
+        })
+    }
 
 }
-
 /**
  *
  * @param isRefreshing

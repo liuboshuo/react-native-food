@@ -28,22 +28,23 @@ class Profile_Page extends React.Component {
                     contentOffset={{y:400}}>
                     <Profile_Top_View />
 
+                    <View style={{marginTop:20}}>
+                        <Set_Profile_Cell
+                            leftImageName="icon_profile_collection"
+                            leftTitleName="收藏"
+                            onPush={()=>{
+                                navigate("profile_like",{"title":"收藏"})
+                            }}
 
-                    <Set_Profile_Cell
-                        leftImageName="icon_profile_collection"
-                        leftTitleName="收藏"
-                        onPush={()=>{
-                            navigate("profile_like",{"title":"收藏"})
-                        }}
-
-                    />
-                    <Set_Profile_Cell
-                        leftImageName="icon_profile_history"
-                        leftTitleName="浏览记录"
-                        onPush={()=>{
-                            navigate("profile_browser",{"title":"浏览记录"})
-                        }}
-                    />
+                        />
+                        <Set_Profile_Cell
+                            leftImageName="icon_profile_history"
+                            leftTitleName="浏览记录"
+                            onPush={()=>{
+                                navigate("profile_browser",{"title":"浏览记录"})
+                            }}
+                        />
+                    </View>
                 </ScrollView>
             </View>
         )

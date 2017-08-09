@@ -63,7 +63,7 @@ class Food_Steps_Page extends React.Component{
     }
 
     like(){
-        const {food_select_item,dispatch} = this.props;
+        const {food_select_item,dispatch,isLike} = this.props;
         console.log(food_select_item)
         dispatch(save_like_food(food_select_item))
     }
@@ -86,7 +86,7 @@ class Food_Steps_Page extends React.Component{
         dispatch(load_food_step(select_item.id))
     }
     render(){
-        const {food_select_item,food_step_refreshing} = this.props;
+        const {food_select_item,food_step_refreshing,isLike} = this.props;
         return(
             <View style={styles.container}>
 
@@ -107,9 +107,9 @@ class Food_Steps_Page extends React.Component{
 
                 {isEmptyObject(food_select_item) ? null :
 
-                    <Button icon={{uri: "icon_food_like"}}
+                    <Button icon={isLike ? {uri:"icon_food_like_selected"}:{uri: "icon_food_like"}}
                             onPress={this.like.bind(this)}
-                            iconStyle={styles.backIcon} style={[styles.like, commonStyle.rowCenter]}
+                            iconStyle={styles.rightIconStyle} style={[styles.like, commonStyle.rowCenter]}
                     />
                 }
 
@@ -204,6 +204,10 @@ const styles = StyleSheet.create({
     backIcon:{
         width:25,
         height:25
+    },
+    rightIconStyle:{
+        width:20,
+        height:20
     },
     backButton:{
         position:'absolute',

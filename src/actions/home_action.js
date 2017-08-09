@@ -2,6 +2,7 @@ import *as ActionTypes from './../actions/actionType'
 import homeDatas from './../../api/home.json'
 import allTagDatas from './../../api/category.json'
 import Immutable from 'immutable'
+import {get} from "../common/server";
 
 /**
  *
@@ -57,32 +58,29 @@ export function getAllTagData(){
                 menu_tag_refreshing:true
             }
         })
-        setTimeout(()=>{
-            //随机三个 /cook/category
-            const allDataTags = allTagDatas.result
-
-            const tags = [];
-            for (let i=0;i<allDataTags.length;i++){
-                const data = allDataTags[i];
-                data["key"] = data.name;
-                data["isOpen"] = true;
-                tags.push(data);
-                for (let j=0;j<data.list.length;j++){
-                    const food = data.list[j];
-                    food["key"] = food.id;
+        get("/cook/category",{},(response)=>{
+            if (response.result){
+                const allDataTags = response.result
+                const tags = [];
+                for (let i=0;i<allDataTags.length;i++){
+                    const data = allDataTags[i];
+                    data["key"] = data.name;
+                    data["isOpen"] = true;
+                    tags.push(data);
+                    for (let j=0;j<data.list.length;j++){
+                        const food = data.list[j];
+                        food["key"] = food.id;
+                    }
+                    data["data"] = data.list;
                 }
-                data["data"] = data.list;
-            }
-
-            dispatch({
-                type:ActionTypes.Menu_AllTagsData,
-                data:{
-                    tags_data:Immutable.fromJS(tags),
-                    menu_tag_refreshing:false
-                }
-            })
-        },2000)
-
+                dispatch({
+                    type:ActionTypes.Menu_AllTagsData,
+                    data:{
+                        tags_data:Immutable.fromJS(tags),
+                        menu_tag_refreshing:false
+                    }
+                })}
+        })
     }
 }
 
@@ -130,9 +128,17 @@ export function getTagDatas() {
         //随机三个
         let top_tags = Immutable.List();
         const allDataTags = allTagDatas.result
+
+        const all = [];
+        for (let i=0;i<allDataTags.length;i++){
+            const listTag = allDataTags[i].list;
+            for (let j=0;j<listTag.length;j++){
+                all.push(listTag[j])
+            }
+        }
         for (let i=0;i<15;i++){
             const index = Math.floor(Math.random() * 28)
-            const data = Immutable.fromJS(allDataTags[index])
+            const data = Immutable.fromJS(all[index])
             data["key"] = Math.random()
             top_tags = top_tags.push(data)
         }

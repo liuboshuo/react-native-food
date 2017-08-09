@@ -78,18 +78,32 @@ export function save_like_food(food_data) {
         profile_reducer = profile_reducer.toJS();
 
         const food_list_like = profile_reducer.food_list_like;
-        let index = false;
-        food_list_like.map(item=>{
+        let index = -1;
+        food_list_like.map((item,itemIndex)=>{
             if (food_data.id == item.id){
-                index = true;
+                index = itemIndex;
             }
         })
-        if (!index){
+        if (index<0){
             food_list_like.push(food_data)
             dispatch({
                 type:ActionTypes.Food_Like_Add_Data,
                 data:{
-                    food_data:food_data
+                    food_data:food_data,
+                    isLike:true
+                }
+            })
+            storage.save({
+                key: like_food_key,
+                data:food_list_like
+            })
+        }else {
+            food_list_like.splice(index,1)
+            dispatch({
+                type:ActionTypes.Food_Like_Delete_Data,
+                data:{
+                    index:index,
+                    isLike:false,
                 }
             })
             storage.save({
@@ -99,7 +113,6 @@ export function save_like_food(food_data) {
         }
     }
 }
-
 /**
  * 读取收藏的菜
  */
