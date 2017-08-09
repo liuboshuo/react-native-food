@@ -48,11 +48,13 @@ export const Food_List_Refreshing = "Food_List_Refreshing"
 
 export const Food_List_Loading = "Food_List_Loading"
 
+export const Food_Refresh_Step = "Food_Refresh_Step"
 export const Food_List_Refreshing_Data = "Food_List_Refreshing_Data";
 
 export const Food_List_Loading_Data = "Food_List_Loading_Data"
 
+export const Food_Browser_Add_Data = "Food_Browser_Add_Data"
 export const Food_Like_Load_Data = "Food_Like_Load_Data";
 
 export const Food_Browser_Load_Data = "Food_Browser_Load_Data"
-
+export const Food_Like_Add_Data = "Food_Like_Add_Data"

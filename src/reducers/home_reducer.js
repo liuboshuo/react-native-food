@@ -25,15 +25,19 @@ function get_home_main(state,data) {
 function get_menu_tags_data(state,data) {
     return state.set("tags_data",data.tags_data).set("menu_tag_refreshing",data.menu_tag_refreshing);
 }
+
 function menu_change_tag(state,data) {
     return state.set("left_tag_select_index",data.left_tag_select_index);
 }
+
 function update_menu_load_tag_refreshing(state,data) {
     return state.set("menu_tag_refreshing",data.menu_tag_refreshing);
 }
+
 function menu_change_view_tag(state,data) {
     return state.set("show_tag_default_view",data.show_tag_default_view).set("menu_tag_refreshing",0);
 }
+
 function menu_change_flat_open(state,data) {
     let tags_data = state.get("tags_data");
     let tag_data = tags_data.get(data.index);

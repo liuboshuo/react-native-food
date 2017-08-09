@@ -73,9 +73,14 @@ const styles = StyleSheet.create({
     },
     backButtonStyle:{
         position:'absolute',
-        top: Platform.OS =='ios' ? 25 : 15,
-        left:15,
-        zIndex:10
+        top: Platform.OS =='ios' ? 20 : 0,
+        left:0,
+        zIndex:10,
+        width:40,
+        height:40,
+        flexDirection:"row",
+        justifyContent:"center",
+        alignItems:'center'
     },
     back:{
         width:25,

@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     View,
-    TouchableOpacity,
+    RefreshControl,
     Text,
     StyleSheet,
     ScrollView,
@@ -13,8 +13,10 @@ import Food_Ingredient_View from './../component/food_ingredient'
 import Food_Step_View from './../component/food_step'
 import Button from "../common/component/button";
 import Food_Detail_Tags from "./../component/food_detail_tag";
-import {save_browser_food,read_browser_food} from './../actions/food_action'
+import {load_food_step} from './../actions/food_action'
 import {connect} from 'react-redux'
+import {isEmptyObject} from "../utils/util";
+import {save_browser_food, save_like_food} from "../actions/profile_action";
 
 const scrollEventThrottle = 1;
 
@@ -28,7 +30,6 @@ class Food_Steps_Page extends React.Component{
             topViewOpacity:new Animated.Value(0)
         }
     }
-
     // 页面自定义导航栏
     static navigationOptions = (navigation)=>{
         return(
@@ -36,15 +37,6 @@ class Food_Steps_Page extends React.Component{
                 header:null
             }
         )
-    }
-
-    componentDidMount() {
-        const {dispatch} = this.props;
-        const {params} = this.props.navigation.state;
-        const {select_item} = params;
-
-        dispatch(read_browser_food())
-        dispatch(save_browser_food(select_item))
     }
     pop(){
         const {goBack} = this.props.navigation;
@@ -70,10 +62,31 @@ class Food_Steps_Page extends React.Component{
         }
     }
 
-    render(){
+    like(){
+        const {food_select_item,dispatch} = this.props;
+        console.log(food_select_item)
+        dispatch(save_like_food(food_select_item))
+    }
+
+    componentDidMount() {
+        this.onRefresh()
         const {params} = this.props.navigation.state;
+        const {dispatch} = this.props;
         const {select_item} = params;
-        let tags = select_item.tags.split(";");
+        dispatch(save_browser_food(select_item))
+    }
+
+    onRefresh(){
+        const {params} = this.props.navigation.state;
+        const {dispatch,food_step_refreshing} = this.props;
+        const {select_item} = params;
+        if (food_step_refreshing){
+            return;
+        }
+        dispatch(load_food_step(select_item.id))
+    }
+    render(){
+        const {food_select_item,food_step_refreshing} = this.props;
         return(
             <View style={styles.container}>
 
@@ -84,7 +97,7 @@ class Food_Steps_Page extends React.Component{
                     })
 
                 }]}>
-                    <Text style={styles.headerTitleStyle}>{select_item.title}</Text>
+                    <Text style={styles.headerTitleStyle}>{food_select_item.title}</Text>
                 </Animated.View>
 
 
@@ -92,31 +105,46 @@ class Food_Steps_Page extends React.Component{
                         onPress={this.pop.bind(this)}
                         iconStyle={styles.backIcon} style={[styles.backButton,commonStyle.rowCenter]}/>
 
+                {isEmptyObject(food_select_item) ? null :
+
+                    <Button icon={{uri: "icon_food_like"}}
+                            onPress={this.like.bind(this)}
+                            iconStyle={styles.backIcon} style={[styles.like, commonStyle.rowCenter]}
+                    />
+                }
 
                 <ScrollView style={styles.container}
                             onScroll={this.onScroll.bind(this)}
-                            scrollEventThrottle={scrollEventThrottle}>
+                            scrollEventThrottle={scrollEventThrottle}
+                            refreshControl={<RefreshControl
+                                onRefresh={this.onRefresh.bind(this)}
+                                refreshing={food_step_refreshing}
+                            />}
+                >
 
-                    <View style={styles.topView}>
-                        <NetWorkImage uri={select_item.albums[0]} style={styles.topIcon}/>
-                    </View>
+                    {isEmptyObject(food_select_item) ?
+                        null:
+                        <View>
+                            <View style={styles.topView}>
+                                <NetWorkImage uri={food_select_item.albums[0]} style={styles.topIcon}/>
+                            </View>
 
-                    <View style={[commonStyle.column,{paddingLeft:6,paddingRight:6}]}>
-                        <Text style={styles.titleTextView}>{select_item.title}</Text>
-                        <Text style={styles.imtroText}>{select_item.imtro}</Text>
-                        <Food_Detail_Tags tags={select_item.tags.split(";")} />
-                    </View>
-
-
-                    <Food_Ingredient_View title="主料" ingredients={select_item.ingredients.split(";")}/>
-                    <Food_Ingredient_View title="辅料" ingredients={select_item.burden.split(";")}/>
-
-                    <View style={styles.stepsView}>
-                        <Food_Step_View
-                            onClickStepImage={this.foodStepImageDetail.bind(this)}title={"步骤"} ingredients={select_item.steps}/>
-                    </View>
+                            <View style={[commonStyle.column,{paddingLeft:6,paddingRight:6}]}>
+                                <Text style={styles.titleTextView}>{food_select_item.title}</Text>
+                                <Text style={styles.imtroText}>{food_select_item.imtro}</Text>
+                                <Food_Detail_Tags tags={food_select_item.tags.split(";")} />
+                            </View>
 
 
+                            <Food_Ingredient_View title="主料" ingredients={food_select_item.ingredients.split(";")}/>
+                            <Food_Ingredient_View title="辅料" ingredients={food_select_item.burden.split(";")}/>
+
+                            <View style={styles.stepsView}>
+                                <Food_Step_View
+                                    onClickStepImage={this.foodStepImageDetail.bind(this)}title={"步骤"} ingredients={food_select_item.steps}/>
+                            </View>
+                        </View>
+                    }
                 </ScrollView>
 
 
@@ -185,6 +213,15 @@ const styles = StyleSheet.create({
         height:40,
         backgroundColor:'transparent',
         zIndex:6666
+    },
+    like:{
+        position:'absolute',
+        right:0,
+        top:common_theme.statusBarHeight,
+        width:40,
+        height:40,
+        backgroundColor:'transparent',
+        zIndex:666666
     }
 
 });

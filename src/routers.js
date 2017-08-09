@@ -5,7 +5,8 @@ import Home_Page from './containers/home_page'
 import Menu_Page from './containers/menu_page'
 import Profile_Page from './containers/profile_page'
 import Food_List_Page from './containers/food_list_page'
-
+import Like_Page from './containers/like_page'
+import Browser_page from './containers/browser_page'
 
 import {StackNavigator,TabNavigator} from 'react-navigation'
 import React from 'react'
@@ -131,6 +132,14 @@ const Routers = StackNavigator(
         },
         food_browser:{
             screen:Food_Browser_Page,
+            navigationOptions:{...navigationOptions}
+        },
+        profile_like:{
+            screen:Like_Page,
+            navigationOptions:{...navigationOptions}
+        },
+        profile_browser:{
+            screen:Browser_page,
             navigationOptions:{...navigationOptions}
         }
     },

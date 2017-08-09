@@ -30,6 +30,7 @@ class Food_List_Page extends React.Component {
             text:null
         }
         this.searching = false;
+        this.inputSearching = false;
     }
     componentWillMount() {
         const {params} = this.props.navigation.state;
@@ -38,27 +39,27 @@ class Food_List_Page extends React.Component {
         }
     }
     componentDidMount() {
-        this.onRefresh()
+        this.onRefresh(true)
     }
     startSearch(){
         this.textInput.blur()
         const text = this.textInput._lastNativeText;
         if (text && text.length){
-            this.searching = true;
-            this.onRefresh();
+            this.inputSearching = true;
+            this.onRefresh(true);
         }
     }
-    onRefresh(){
+    onRefresh(isRefreshing){
         const {params} = this.props.navigation.state;
         const dispatch = this.props.dispatch;
         const {rn} = this.props;
-        if (!this.searching){
+        if (!this.searching && !this.inputSearching){
             const {select_tag} = params;
-            dispatch(load_food_list_data(null,select_tag.id,rn));
+            dispatch(load_food_list_data(null,select_tag.id,rn,isRefreshing));
         }else {
             const text = this.textInput._lastNativeText
             if (text){
-                dispatch(load_food_list_data(text,null,rn));
+                dispatch(load_food_list_data(text,null,rn,isRefreshing));
             }
         }
     }
@@ -95,7 +96,7 @@ class Food_List_Page extends React.Component {
         if (isRefreshing || loading != 0 ){
             return;
         }
-        this.onRefresh()
+        this.onRefresh(false)
     }
     renderFooterView(){
         const {isRefreshing,loading} = this.props;
@@ -152,14 +153,25 @@ class Food_List_Page extends React.Component {
                     <FlatList style={styles.flat}
                               renderItem={this.renderItem.bind(this)}
                               data={food_list_data}
-                              onRefresh={()=>this.onRefresh()}
+                              onRefresh={()=>this.onRefresh(true)}
                               ItemSeparatorComponent={this.itemSeparatorComponent}
                               refreshing={isRefreshing}
                               ListFooterComponent={this.renderFooterView.bind(this)}
                               onEndReachedThreshold={0}
                               onEndReached={this.onEndReached.bind(this)}
                     />
-                    :null
+                    :this.inputSearching?
+                        <FlatList style={styles.flat}
+                                  renderItem={this.renderItem.bind(this)}
+                                  data={food_list_data}
+                                  onRefresh={()=>this.onRefresh()}
+                                  ItemSeparatorComponent={this.itemSeparatorComponent}
+                                  refreshing={isRefreshing}
+                                  ListFooterComponent={this.renderFooterView.bind(this)}
+                                  onEndReachedThreshold={0}
+                                  onEndReached={this.onEndReached.bind(this)}
+                        />:null
+
                 }
 
 
