@@ -50,7 +50,7 @@ export default class Food_Browser_Page extends Component {
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.backButtonStyle} onPress={this.pop.bind(this)}>
-                    <Image source={common_theme.icon_back} style={styles.back}/>
+                    <Image source={{uri:"icon_back"}} style={styles.back}/>
                 </TouchableOpacity>
                 <Gallery
                     style={{flex: 1, backgroundColor: 'rgba(0,0,0,0.6)' }}

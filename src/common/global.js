@@ -1,13 +1,17 @@
+/**
+ * 为app添加一个log函数  dev环境打印log, 生产环境不打印log
+ */
 
-
-//为app添加一个log函数  dev环境打印log, 生产环境不打印log
 global.appLog = function (message){
     if (__DEV__){
         console.log(message)
     }
 }
 
-//设置全局分页数
+/**
+ * 设置全局分页数
+ */
+
 global.pageSize = 30;
 
 
@@ -15,6 +19,10 @@ import {AsyncStorage} from 'react-native'
 import Storage from 'react-native-storage';
 
 
+/**
+ * 全局的存储对象
+ * @type {Storage}
+ */
 const storage = new Storage({
     // 最大容量，默认值1000条数据循环存储
     size: 1000,

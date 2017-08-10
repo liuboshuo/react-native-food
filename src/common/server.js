@@ -16,7 +16,10 @@ const SERVER_ERROR_MESSAGE = {
 }
 
 
-// 首先配置服务端的配置数据
+/**
+ * 首先配置服务端的配置数据 app加载的时候配置服务器参数
+  */
+
 export function server_config(env) {
 
     if(env == null || env == undefined){
@@ -29,33 +32,60 @@ export function server_config(env) {
     }
 }
 
+/**
+ * http请求错误
+ */
 export class HttpError {
     // 构造
     constructor(status_code) {
         this.status_code = status_code;
     }
 }
+
+/**
+ * 获取绝对url
+ * @param url
+ * @returns {*}
+ */
 function configURL(url) {
     return config.server_host + url
 }
-//服务出错
+
+/**
+ * 服务器出错
+ */
+
 export function defaultOnServerError(error_code,message) {
     const msg = message || server_error_message(error_code) || "服务器异常！！"
     appLog(message)
     hideHud()
     Alert.alert("错误",msg)
 }
-//网络连接出错
+
+/**
+ * 网络连接出错
+ */
+
 export function defaultOnNetWorkError(error) {
     appLog(error)
     hideHud()
     Alert.alert("错误","网络连接出错，请稍后在尝试");
 }
 
+/**
+ * 获取服务器出错的问题
+ * @param code
+ * @returns {*}
+ */
 function server_error_message(code) {
     return SERVER_ERROR_MESSAGE[code];
 }
 
+/**
+ * 判断是否网络连接正确
+ * @param response
+ * @returns {*}
+ */
 function checkStatus(response) {
     appLog(`request status ${response.status}`);
     if (response.status >= 200 && response.status< 300){
@@ -66,7 +96,11 @@ function checkStatus(response) {
         throw httpError;
     }
 }
-//请求
+
+/**
+ * /请求
+ */
+
 export function get(url,params,onSuccess,onServerError=defaultOnServerError,onNetWorkError=defaultOnNetWorkError) {
     params["key"] = config.appKey;
     const string = qs.stringify(params,{ arrayFormat: 'brackets'});
@@ -74,12 +108,25 @@ export function get(url,params,onSuccess,onServerError=defaultOnServerError,onNe
     return request("GET",path,params,onSuccess,onServerError,onNetWorkError)
 }
 
-//请求
+/**
+ * 请求
+ */
 export function post(url,params,onSuccess,onServerError=defaultOnServerError,onNetWorkError=defaultOnNetWorkError) {
     return request("POST",url,params,onSuccess,onServerError,onNetWorkError)
 }
 
-export function request(method,url,params,onSuccess,onServerError=defaultOnServerError,onNetWorkError=defaultOnNetWorkError) {
+
+/**
+ * 发送请求
+ * @param method
+ * @param url
+ * @param params
+ * @param onSuccess 回调
+ * @param onServerError
+ * @param onNetWorkError
+ * @returns {Promise.<TResult>}
+ */
+function request(method,url,params,onSuccess,onServerError=defaultOnServerError,onNetWorkError=defaultOnNetWorkError) {
 
     return fetch(configURL(url),{
         method:method,

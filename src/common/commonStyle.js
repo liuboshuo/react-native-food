@@ -45,7 +45,6 @@ export const common_theme = {
 
     cellMaxHeight:50,
 
-    icon_back:{uri:"icon_back"}
 }
 
 

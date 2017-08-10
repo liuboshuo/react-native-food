@@ -14,7 +14,13 @@ class Main_Page extends Component{
         NativeModules.NativeAppModules.getAppInfos().then(data=>{
             server_config(data)
         })
+        /**
+         * 加载浏览数据
+         */
         dispatch(read_browser_food())
+        /**
+         * 获取收藏数据
+         */
         dispatch(read_like_food())
     }
     render(){

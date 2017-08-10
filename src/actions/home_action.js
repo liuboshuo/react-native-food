@@ -5,7 +5,7 @@ import Immutable from 'immutable'
 import {get} from "../common/server";
 
 /**
- *
+ *  获取首页推荐轮播图
  * @returns {function(*, *)}
  */
 export function getBannerDatas() {
@@ -30,7 +30,7 @@ export function getBannerDatas() {
 }
 
 /**
- *
+ * 获取首页推荐菜谱
  * @returns {function(*, *)}
  */
 export function getMainDatas() {
@@ -47,7 +47,7 @@ export function getMainDatas() {
 }
 
 /**
- *
+ * 获取所有分类
  * @returns {function(*, *)}
  */
 export function getAllTagData(){
@@ -85,7 +85,7 @@ export function getAllTagData(){
 }
 
 /**
- *
+ *  分类的选取
  * @param left_tag_select_index
  * @returns {function(*, *)}
  */
@@ -119,7 +119,7 @@ export function changeOpen(isOpen,index) {
 }
 
 /**
- * 
+ *  获取首页15个标签
  * @returns {function(*, *)}
  */
 export function getTagDatas() {

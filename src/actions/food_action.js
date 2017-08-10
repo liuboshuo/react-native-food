@@ -4,7 +4,7 @@ import Immutable from 'immutable'
 import {get} from './../common/server'
 
 /**
- *
+ *  菜谱列表的刷新 ，记载
  * @param isRefreshing  刷新
  * @param rn   加载的开始
  * @param pn   分页数
@@ -42,6 +42,12 @@ export function load_food_list_data(searchText=null,cid=null,pageNo=0,isRefreshi
     }
 }
 
+/**
+ * 菜谱列表刷新
+ * @param dispacth
+ * @param response
+ * @param isRefreshing
+ */
 function loading_refreshing_food_list(dispacth,response,isRefreshing) {
 
     const {result} = response;
@@ -72,6 +78,12 @@ function loading_refreshing_food_list(dispacth,response,isRefreshing) {
     }
 
 }
+
+/**
+ * 菜谱步骤的加载
+ * @param id
+ * @returns {function(*, *)}
+ */
 export function load_food_step(id) {
     return ((dispatch,getState)=>{
         const params = {id:id}
@@ -114,13 +126,30 @@ export function load_food_step(id) {
         })
     })
 }
+
+/**
+ * 菜谱列表的Willunmount
+ * @returns {function(*)}
+ */
 export function food_list_unmount_clear() {
     return dispatch=>{
         dispatch({
             type:ActionTypes.Food_List_Unmount_Clear
         })
     }
+}
 
+/**
+ * 菜谱做法的willUnmount
+ * @returns {function(*)}
+ */
+export function food_step_unmount_clear() {
+    return dispatch=>{
+        appLog("componentDidUnmount")
+        dispatch({
+            type:ActionTypes.Food_Step_Unmount_Clear
+        })
+    }
 }
 /**
  *
@@ -138,7 +167,7 @@ function food_list_data_change_refreshing(isRefreshing,rn) {
 }
 
 /**
- *
+ *  菜谱列表的分页
  * @param data
  * @param loading
  * @returns {{type: null, data: {food_list_data: *, loading: *}}}
@@ -157,7 +186,7 @@ function food_list_change_loading_data(data,loading,rn) {
 
 
 /**
- *
+ *  菜谱列表的刷新
  * @param data
  * @param isRefreshing
  * @returns {{type, data: {food_list_data: *, isRefreshing: *}}}
@@ -175,7 +204,7 @@ function food_list_change_refresh_data(data,isRefreshing,rn) {
 
 
 /**
- *
+ *  菜谱列表的上拉数据加载
  * @param loading 0: 加载 1, 正在 2,加载完毕 3,暂无数据 4,刷新数据时候 的  错误（显示不同的界面）
  * @returns {{type, data: {loading: *}}}
  */

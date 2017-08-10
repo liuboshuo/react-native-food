@@ -9,12 +9,10 @@ import {
     TextInput
 } from 'react-native'
 import {connect} from 'react-redux'
-import {load_food_list_data} from "../actions/food_action";
+import {food_list_unmount_clear, load_food_list_data} from "../actions/food_action";
 import {common_theme,commonStyle} from "./../common/commonStyle";
-import NetWorkImage from "./../common/component/netWorkImage";
-import NavigationBar from "./../common/component/navBarCommon";
-import Food_Detail_Tags from "./../component/food_detail_tag";
-import Button from "../common/component/button";
+import Button from "./../common/component/button";
+import Common_Food_List_Cell from "../component/common_cell";
 class Food_List_Page extends React.Component {
     // 页面自定义导航栏
     static navigationOptions = (navigation)=>{
@@ -37,6 +35,11 @@ class Food_List_Page extends React.Component {
         if (!params){
             this.searching = true;
         }
+    }
+
+    componentWillUnmount() {
+        const dispatch = this.props.dispatch;
+        dispatch(food_list_unmount_clear());
     }
     componentDidMount() {
         this.onRefresh(true)
@@ -64,20 +67,11 @@ class Food_List_Page extends React.Component {
         }
     }
     renderItem(item){
-        let tags = item.item.tags.split(";");
-        if (tags.length > 3){
-            tags = tags.splice(0,3);
-        }
-        return(
-            <TouchableOpacity onPress={this.push_food_step.bind(this,item.item)} style={styles.cellContent}>
-                <NetWorkImage uri={item.item.albums[0]} style={styles.iconStyle}/>
-                <View style={styles.right}>
-                    <Text style={[commonStyle.titleFontStyle,styles.titleStyle]}>{item.item.title}</Text>
-                    <Text numberOfLines={3} style={[commonStyle.subTitleFontStyle,styles.textStyle]}>{item.item.imtro}</Text>
-                    <Food_Detail_Tags tags={tags} />
-                </View>
-                <Image source={{uri:"icon_right"}} style={{width:15,height:10}}/>
-            </TouchableOpacity>
+
+        return (
+            <Common_Food_List_Cell
+                food_list_item={item.item}
+                onClick={this.push_food_step.bind(this)}/>
         )
     }
     push_food_step(select_item){
@@ -138,7 +132,7 @@ class Food_List_Page extends React.Component {
                     <TextInput ref={ref=>{this.textInput=ref}} placeholder={"输入关键字"}
                                style={styles.titleView}
                                defaultValue={this.searching ? this.state.text : params.select_tag.name}
-                               androidColorOfUnderLines="transparent"
+                               androidLineOfColor="transparent"
 
                     />
 
@@ -192,33 +186,11 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor:'#fff'
     },
-    cellContent:{
-        flexDirection:"row",
-        alignItems:'center',
-        marginLeft:common_theme.viewMPLeft,
-        marginRight:common_theme.viewMPRight,
-        paddingTop:common_theme.viewMPTop,
-        paddingBottom:common_theme.viewMPBottom
-    },
+
     separatorStyle:{
         height:0.3,
         backgroundColor:common_theme.separatorColor,
         marginLeft:common_theme.viewMPLeft,
-    },
-    iconStyle:{
-        width:common_theme.screenWidth * 0.35,
-        height:common_theme.screenWidth * 0.25,
-        borderRadius:6
-    },
-    right:{
-        flex:1,
-        marginLeft:10,
-    },
-    titleStyle:{
-        marginBottom:6,
-    },
-    textStyle:{
-        marginBottom:4,
     },
     rightBottom:{
         flexDirection:'row',

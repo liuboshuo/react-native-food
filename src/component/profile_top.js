@@ -28,10 +28,12 @@ export default  class Profile_Top_View extends Component{
                     <Image  source={{uri:"icon_profile_user"}} style={styles.leftIconStyle}/>
                     <View style={styles.rightOutViewStyle}>
                         <Text style={styles.rightInnerTextStyle}>
-                            {"测试账号"}
+                            {"我的账户名称"}
                         </Text>
                     </View>
-                    <Image source={{uri:"icon_right"}} style={styles.rightInnerRightIconStyle}/>
+                    <View style={styles.grade}>
+                        <Text style={styles.gradeText}>我的等级: 1</Text>
+                    </View>
                 </View>
             </View>
         )
@@ -45,33 +47,36 @@ const styles = StyleSheet.create({
 
     },
     accountViewStyle:{
-        marginTop:Platform.OS == 'ios' ? 450 : 50,
-        flexDirection:'row',
+        marginTop:Platform.OS == 'ios' ? 430 : 30,
         alignItems:"center",
-        justifyContent:'space-around'
     },
     leftIconStyle:{
-        width:50,
-        height:50,
-        borderRadius:25,
-        marginLeft:8
+        width:70,
+        height:70,
+        borderRadius:35,
     },
 
     rightOutViewStyle:{
+        marginTop:3,
         flexDirection:'row',
-        width:width * 0.7,
-        alignItems:'center'
+        alignItems:'center',
+        justifyContent:"center"
     },
     rightInnerTextStyle:{
-        fontSize:common_theme.titleFontSize,
+        fontSize:common_theme.subTitleFontSize,
+        color:"#fff",
     },
-    rightInnerLeftIconStyle:{
-        width:20,
-        height:20,
+    grade:{
+        backgroundColor:"rgb(0,201,75)",
+        paddingLeft:2,
+        paddingRight:2,
+        paddingTop:1,
+        paddingBottom:1,
+        marginTop:3,
+        borderRadius:3
     },
-    rightInnerRightIconStyle:{
-        width:8,
-        height:13,
-
-    }
+    gradeText:{
+        fontSize:11,
+        color:"#fff"
+    },
 })

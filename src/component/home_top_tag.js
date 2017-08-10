@@ -91,5 +91,6 @@ const styles = StyleSheet.create({
     },
     blackTextStyle:{
         fontSize:common_theme.subTitleFontSize,
+        color:"#666666"
     }
 })

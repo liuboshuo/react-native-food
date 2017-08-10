@@ -10,6 +10,7 @@ const initialState = Immutable.Map({
     isLike:false
 })
 
+
 function change_refreshing(state,data) {
     return state.set("isRefreshing",data.isRefreshing).set("rn",data.rn);
 }
@@ -40,9 +41,12 @@ function food_like(state,data) {
 function food_unlike(state,data) {
     return state.set("isLike",false)
 }
-function clear(state,data) {
+function food_list_clear(state,data) {
 
     return state.set("food_list_data",Immutable.List()).set("rn",0).set("loading",0).set("isRefreshing",false)
+}
+function clear_food_step(state,data) {
+    return state.set("food_select_item",Immutable.List()).set("isLike",false).set("food_step_refreshing",false)
 }
 const tables = {
     "Food_List_Refreshing":change_refreshing,
@@ -52,7 +56,8 @@ const tables = {
     "Food_Refresh_Step":food_refresh_step,
     "Food_Like_Add_Data":food_like,
     "Food_Like_Delete_Data":food_unlike,
-    "Food_List_Unmount_Clear":clear
+    "Food_List_Unmount_Clear":food_list_clear,
+    "Food_Step_Unmount_Clear":clear_food_step
 }
 
 export default function food_reducer(state=initialState,action) {

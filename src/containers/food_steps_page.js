@@ -7,16 +7,16 @@ import {
     ScrollView,
     Animated
 } from 'react-native'
-import {common_theme,commonStyle} from "../common/commonStyle"
-import NetWorkImage from "../common/component/netWorkImage";
+import {common_theme,commonStyle} from "./../common/commonStyle"
+import NetWorkImage from ".././common/component/netWorkImage";
 import Food_Ingredient_View from './../component/food_ingredient'
 import Food_Step_View from './../component/food_step'
-import Button from "../common/component/button";
+import Button from "./../common/component/button";
 import Food_Detail_Tags from "./../component/food_detail_tag";
-import {load_food_step} from './../actions/food_action'
+import {load_food_step,food_step_unmount_clear} from './../actions/food_action'
 import {connect} from 'react-redux'
 import {isEmptyObject} from "../utils/util";
-import {save_browser_food, save_like_food} from "../actions/profile_action";
+import {save_browser_food, save_like_food} from "./../actions/profile_action";
 
 const scrollEventThrottle = 1;
 
@@ -67,7 +67,10 @@ class Food_Steps_Page extends React.Component{
         console.log(food_select_item)
         dispatch(save_like_food(food_select_item))
     }
-
+    componentWillUnmount() {
+        const dispatch = this.props.dispatch;
+        dispatch(food_step_unmount_clear());
+    }
     componentDidMount() {
         this.onRefresh()
         const {params} = this.props.navigation.state;

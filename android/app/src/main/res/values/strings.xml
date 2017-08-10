@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">rn_foods</string>
     <string name="server_host">http://apis.juhe.cn</string>
+    <string name="appKey">3da1a3e8afd28eb679c98130e46bb5db</string>
 </resources>

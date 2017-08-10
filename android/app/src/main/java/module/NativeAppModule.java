@@ -101,7 +101,7 @@ public class NativeAppModule extends ReactContextBaseJavaModule implements Activ
 
         Resources resources = getCurrentActivity().getResources();
         map.putString("server_host", resources.getString(R.string.server_host));
-
+        map.putString("appKey",resources.getString(R.string.appKey));
         map.putString("version", getVersion());
         String packageName = getCurrentActivity().getPackageName();
         map.putString("appId",packageName);

@@ -113,6 +113,63 @@ export function save_like_food(food_data) {
         }
     }
 }
+
+/**
+ * 删除浏览记录
+ * @param index
+ * @returns {function(*, *)}
+ */
+export function delete_browser(index) {
+
+    return (dispatch,getState)=>{
+
+        let {profile_reducer} = getState();
+        profile_reducer = profile_reducer.toJS();
+
+        const food_list_browser = profile_reducer.food_list_browser;
+
+        food_list_browser.splice(index,1)
+
+        dispatch({
+            type:ActionTypes.Food_Browser_Delete_Data,
+            data:{
+                index:index,
+            }
+        })
+        storage.save({
+            key: browser_food_key,
+            data:food_list_browser
+        })
+    }
+
+}
+/**
+ * 取消收藏
+ */
+export function delete_like(index) {
+
+    return (dispatch,getState)=>{
+
+        let {profile_reducer} = getState();
+        profile_reducer = profile_reducer.toJS();
+
+        const food_list_like = profile_reducer.food_list_like;
+        food_list_like.splice(index,1)
+
+        dispatch({
+            type:ActionTypes.Food_Like_Delete_Data,
+            data:{
+                index:index,
+                isLike:false,
+            }
+        })
+        storage.save({
+            key: like_food_key,
+            data:food_list_like
+        })
+    }
+
+}
 /**
  * 读取收藏的菜
  */

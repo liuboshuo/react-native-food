@@ -1,8 +1,8 @@
 # ```react-native```实现的菜谱应用
-***
+
 
 ## 前言
-****
+
 上一个项目[天气预报](https://github.com/liuboshuo/react-native-weather)使用```react-native```提供的传统```state```和```props```管理搭建项目, 这个则采用```react-redux,redux```搭建项目;两者区别在[天气预报](https://github.com/liuboshuo/react-native-weather)有详细的讲解，本项目重点是```redux,react-redux,react-navigation```使用;
 
 官方文档
@@ -17,7 +17,7 @@
 
 
 ## 项目介绍
-***
+
 
 ### 功能
 
@@ -47,11 +47,11 @@
 * 组件和```action```的绑定等
 
 ## 项目截图
-***
+
 
 
 ## 项目使用框架
-***
+
 ```
 "dependencies": {
   "immutable": "^3.8.1",
@@ -71,7 +71,9 @@
 > [react-native-storage](https://github.com/sunnylqm/react-native-storage)
 
 一个本地持久存储的封装，可以同时支持react-native(AsyncStorage)和浏览器(localStorage)
+这个框架的存储内容是文件存储，而且还是明文的，可以在iOS沙盒找到存储文件，打开后内容一目了然。这太不安全了；
 
+所以,如果你的项目安全性比较高，建议搭配加密的js框架一起使用。crypto-js
 * ```react-native-gallery```
 >[react-native-gallery](https://github.com/ldn0x7dc/react-native-gallery)
 
@@ -99,4 +101,6 @@ immutable可以说给```react```的app提高了性能,是很厉害的一个库�
 redux-thunk 是 redux 官方文档中用到的异步组件
 
 ## 心得
-***
+* 使用redux是有利于项目的搭建，和业务逻辑拆分，降低耦合度
+* 在app中store管理的state是全局的，这导致在退出页面的数据还存在内存，这就需要我们收到能够清除
+* 我们都知道web编写style是一件繁琐的事情，虽然react-native的style比web的css更简单。但是当app复杂化的时候(比如管理皮肤)，怎样更方便去管理style是一个问题？求解？ 有方案的大神可以联系liushuo132981@163.com一起沟通交流

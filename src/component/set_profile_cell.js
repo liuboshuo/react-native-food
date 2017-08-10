@@ -26,8 +26,9 @@ export default class Set_Profile_Cell extends Component {
 
         rightTitleName:'',
 
-        rightImageName:""
+        rightImageName:"",
 
+        separator:true
     }
 
     constructor(props){
@@ -45,6 +46,10 @@ export default class Set_Profile_Cell extends Component {
                     </View>
                     {this.renderRightContent()}
                 </View>
+                {this.props.separator ?
+                    <View style={styles.separatorStyle}></View>
+                    :null
+                }
 
             </TouchableOpacity>
 
@@ -76,8 +81,6 @@ const styles = StyleSheet.create({
         height:40,
         flexDirection:'row',
         justifyContent:'space-between',
-        borderBottomColor:common_theme.separatorColor,
-        borderBottomWidth:0.5,
         alignItems:'center'
     },
     leftOutViewStyle:{
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
     leftIconStyle:{
         width:20,
         height:20,
-        marginLeft:8,
+        marginLeft:15,
         resizeMode:'contain'
     },
     leftTextStyle:{
@@ -96,17 +99,23 @@ const styles = StyleSheet.create({
         fontSize:common_theme.titleFontSize
     },
     rightOutViewStyle:{
-        marginRight:10,
+        marginRight:common_theme.viewMPRight,
         flexDirection:'row',
         alignItems:'center'
     },
     rightLeftIconStyle:{
         width:24,
         height:13,
-        marginRight:10
+        marginRight:common_theme.viewMPRight
     },
     rightIconStyle:{
         height:13,
         width:8,
     },
+    separatorStyle:{
+        height:0.5,
+        backgroundColor:common_theme.separatorColor,
+        marginLeft:15
+    }
+
 });
