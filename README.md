@@ -1,4 +1,4 @@
-# ```react-native```实现的菜谱应用
+#react-native实现的菜谱应用
 
 
 ## 前言
@@ -13,7 +13,7 @@
 其中react-redux有许多中间件redux-thunk,react-logger等
 
 个人学习中做的小Demo,有兴趣可以共同学习一下
-[react-learn](https://github.com/liuboshuo/react-learn)不断更新中...
+[react-native-learn](https://github.com/liuboshuo/react-native)不断更新中...
 
 
 ## 项目介绍
@@ -49,6 +49,34 @@
 ## 项目截图
 ![](https://github.com/liuboshuo/react-native-food/blob/master/image/rn_food.gif)
 
+
+### 安装
+
+```
+git clone https://github.com/liuboshuo/react-native-food.git
+```
+
+```
+npm install
+```
+
+
+### 运行
+
+[数据来源](https://www.juhe.cn/docs/api/id/46/aid/129)
+
+在android项目找到string.xml文件替换你申请的appKey
+
+```
+react-native run-android
+```
+
+在iOS项目找到pch文件替换你申请的appKey
+
+```
+react-native run-ios
+
+```
 
 ## 项目使用框架
 
