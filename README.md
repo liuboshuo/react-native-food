@@ -48,7 +48,7 @@
 
 ## 项目截图
 
-
+![](https://github.com/liuboshuo/react-native-food/blob/master/image/rn_food.gif)
 
 ### 安装
 
@@ -61,7 +61,7 @@ npm install
 ```
 
 
-### 运行
+### 运行客户端
 
 [数据来源](https://www.juhe.cn/docs/api/id/46/aid/129)
 
