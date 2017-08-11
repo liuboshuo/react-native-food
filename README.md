@@ -47,7 +47,7 @@
 * 组件和```action```的绑定等
 
 ## 项目截图
-![](https://github.com/liuboshuo/react-native-food/blob/master/image/rn_food.gif)
+
 
 
 ### 安装
